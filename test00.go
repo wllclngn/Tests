@@ -9,7 +9,7 @@ func main() {
     fmt.Println(value, "is the original string.")
     // FIRST PASS
     for i := 0; i < 16; i++ {
-        y := strconv.Itoa(i) + "BOOTY"
+        y := strconv.Itoa(i) + "HAND"
         value = append(value, y)
     }
     fmt.Println(value, "is the first pass' string.")
