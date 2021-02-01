@@ -81,11 +81,11 @@ func main() {
 		for l := 0; l <= 100; l++ {
 			select {
 			case <-fire:
-				fmt.Println(<-fire, fire, "manuals have been burnt. #1")
 				<-fire
+				fmt.Println(fire, "manuals have been burnt. #1")
 			case <-fire2:
-				fmt.Println(<-fire2, fire2, "manuals have been burnt. #2")
 				<-fire2
+				fmt.Println(fire2, "manuals have been burnt. #2")
 			}
 		}
 	}(foundMan, foundMan2)
