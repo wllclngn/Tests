@@ -82,12 +82,14 @@ func main() {
 
 	go func(fire chan string, fire2 chan string) {
 		defer wg.Done()
-		for l := 0; l <= 172; l++ {
+		for l := 0; l <= 200; l++ {
 			select {
 			case <-fire:
-				fmt.Println(<-fire, fire, "s have been burnt. #1")
+				fmt.Println(<-fire, fire, "manuals have been burnt. #1")
+				<-fire
 			case <-fire2:
-				fmt.Println(<-fire2, fire2, "s have been burnt. #2")
+				fmt.Println(<-fire2, fire2, "manuals have been burnt. #2")
+				<-fire2
 			}
 		}
 	}(foundMan, foundMan2)
