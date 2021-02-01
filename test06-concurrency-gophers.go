@@ -10,7 +10,7 @@ import (
 
 // Thx to Chance Dinkins, Tim Heckman and Nathan Bass in Gophers' Slack channel.
 
-// MAKE A GOHPERS BURNING C++ MANUALS THING
+// GOHPERS BURNING C++ MANUALS THING
 
 func main() {
 
