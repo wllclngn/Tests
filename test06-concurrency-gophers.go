@@ -19,7 +19,7 @@ func main() {
 	foundMan2 := make(chan string)
 
 	// GENERATE C++ MANUALS FOR INCINERATOR
-	wg.Add(5)
+	wg.Add(6)
 	go func() {
 		defer wg.Done()
 		defer close(manuals)
@@ -75,17 +75,39 @@ func main() {
 		}
 	}(manuals2)
 
-	go func(fire chan string, fire2 chan string) {
+	/*
+		go func(fire chan string, fire2 chan string) {
+			defer wg.Done()
+			for l := 0; l <= 50; l++ {
+				select {
+				case <-fire:
+					fmt.Println("GOPHER #1 burnt a C++ manual.")
+				case <-fire2:
+					fmt.Println("GOPHER #2 burnt a C++ manual.")
+				}
+			}
+		}(foundMan, foundMan2)
+	*/
+
+	go func(fire chan string) {
 		defer wg.Done()
-		for l := 0; l <= 100; l++ {
+		for l := 0; l <= 50; l++ {
 			select {
 			case <-fire:
-				fmt.Println(fire, "manuals have been burnt. #1")
-			case <-fire2:
-				fmt.Println(fire2, "manuals have been burnt. #2")
+				fmt.Println("GOPHER #1 burnt a C++ manual.")
 			}
 		}
-	}(foundMan, foundMan2)
+	}(foundMan)
+
+	go func(fire2 chan string) {
+		defer wg.Done()
+		for l := 0; l <= 50; l++ {
+			select {
+			case <-fire2:
+				fmt.Println("GOPHER #2 burnt a C++ manual.")
+			}
+		}
+	}(foundMan2)
 
 	wg.Wait()
 }
