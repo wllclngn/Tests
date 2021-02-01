@@ -6,19 +6,14 @@ import (
 	"sync"
 )
 
-// import "time"
-
-// Thx to Chance Dinkins, Tim Heckman and Nathan Bass in Gophers' Slack channel.
-
 // GOHPERS BURNING C++ MANUALS THING
+// Thx to Chance Dinkins, Tim Heckman and Nathan Bass in Gophers' Slack channel.
 
 func main() {
 
 	wg := &sync.WaitGroup{}
 
 	// done := make(chan bool, 1)
-
-	// var farm []string
 	//manuals := make(chan []string, 43)
 	manuals := make(chan string)
 	manuals2 := make(chan string)
