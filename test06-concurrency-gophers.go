@@ -8,11 +8,13 @@ import (
 
 // import "time"
 
-// GOHPERS BURNING C++ MANUALS THING
+// Thx to Chance Dinkins, Tim Heckman and Nathan Bass in Gophers' Slack channel.
+
+// MAKE A GOHPERS BURNING C++ MANUALS THING
 
 func main() {
 
-	var wg sync.WaitGroup
+	wg := &sync.WaitGroup{}
 
 	// done := make(chan bool, 1)
 
@@ -26,30 +28,34 @@ func main() {
 	// GENERATE C++ MANUALS FOR INCINERATOR
 	wg.Add(5)
 	go func() {
+		defer wg.Done()
+		defer close(manuals)
 		for i := 0; i < 86; i++ {
 			maths := math.Mod(float64(i), 2)
 			if maths == 0 {
 				manuals <- "C++ Manual"
 			}
 		}
-		// close(manuals)
-		//defer wg.Done()
+
 	}()
 
 	// GENERATE C++ MANUALS FOR INCINERATOR
 	go func() {
+		defer wg.Done()
+		defer close(manuals2)
 		for i := 0; i < 86; i++ {
 			maths := math.Mod(float64(i), 2)
 			if maths == 0 {
 				manuals2 <- "C++ Manual"
 			}
 		}
-		// close(manuals)
-		//defer wg.Done()
+
 	}()
 
 	// FIND C++ MANUALS FOR INCINERATOR
 	go func(x chan string) {
+		defer wg.Done()
+		defer close(foundMan)
 		for j := 0; j < 43; j++ {
 			foundMan := <-x
 			if j < 14 {
@@ -60,12 +66,12 @@ func main() {
 				fmt.Println("GOT a " + foundMan + ". Almost need a break")
 			}
 		}
-		// close(foundMan)
-		//defer wg.Done()
 	}(manuals)
 
 	// FIND C++ MANUALS FOR INCINERATOR
 	go func(y chan string) {
+		defer wg.Done()
+		defer close(foundMan2)
 		for k := 0; k < 43; k++ {
 			foundMan2 := <-y
 			if k < 14 {
@@ -76,22 +82,19 @@ func main() {
 				fmt.Println("FOUND a " + foundMan2 + ". Workin' up a sweat!")
 			}
 		}
-		// close(foundMan2)
-		//defer wg.Done()
+
 	}(manuals2)
 
 	go func(fire chan string, fire2 chan string) {
-		for l := 0; l <= 86; l++ {
+		defer wg.Done()
+		for l := 0; l <= 172; l++ {
 			select {
 			case <-fire:
-				fmt.Println("s have been burnt. #1")
+				fmt.Println(<-fire, fire, "s have been burnt. #1")
 			case <-fire2:
-				fmt.Println("s have been burnt. #2")
-			default:
-				fmt.Println("Wrong.")
+				fmt.Println(<-fire2, fire2, "s have been burnt. #2")
 			}
 		}
-		//defer wg.Done()
 	}(foundMan, foundMan2)
 
 	wg.Wait()
