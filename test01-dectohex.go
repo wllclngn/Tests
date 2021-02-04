@@ -53,8 +53,8 @@ func dectohex(x int) {
 }
 
 func main() {
-    dectohex(117)
-    dectohex(352)
+    dectohex(55)
+    dectohex(92)
     dectohex(23000)
     dectohex(12384800984930)
 }
