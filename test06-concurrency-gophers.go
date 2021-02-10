@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-// GOHPERS BURNING C++ MANUALS THING
+// GOHPERS RECYCLING C++ MANUALS, ala https://talks.golang.org/2012/waza.slide#1
 // Thx to Chance Dinkins, Tim Heckman and Nathan Bass in Gophers' Slack channel.
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 	foundMan := make(chan string)
 	foundMan2 := make(chan string)
 
-	// GENERATE C++ MANUALS FOR INCINERATOR
+	// GENERATE C++ MANUALS FOR RECYCLING
 	wg.Add(6)
 	go func() {
 		defer wg.Done()
@@ -31,7 +31,7 @@ func main() {
 		}
 	}()
 
-	// GENERATE C++ MANUALS FOR INCINERATOR
+	// GENERATE C++ MANUALS FOR RECYCLING
 	go func() {
 		defer wg.Done()
 		defer close(manuals2)
@@ -43,7 +43,7 @@ func main() {
 		}
 	}()
 
-	// FIND C++ MANUALS FOR INCINERATOR
+	// FIND C++ MANUALS FOR RECYCLING
 	go func(x chan string) {
 		defer wg.Done()
 		defer close(foundMan)
@@ -54,12 +54,12 @@ func main() {
 			} else if j < 25 {
 				fmt.Println("GOT a " + foundMan + ". Yellow pages, and rats have ate on it.")
 			} else {
-				fmt.Println("GOT a " + foundMan + ". Almost need a break")
+				fmt.Println("GOT a " + foundMan + ". Almost need a break.")
 			}
 		}
 	}(manuals)
 
-	// FIND C++ MANUALS FOR INCINERATOR
+	// FIND C++ MANUALS FOR RECYCLING
 	go func(y chan string) {
 		defer wg.Done()
 		defer close(foundMan2)
@@ -75,23 +75,9 @@ func main() {
 		}
 	}(manuals2)
 
-	/*
-		go func(fire chan string, fire2 chan string) {
-			defer wg.Done()
-			for l := 0; l <= 50; l++ {
-				select {
-				case <-fire:
-					fmt.Println("GOPHER #1 burnt a C++ manual.")
-				case <-fire2:
-					fmt.Println("GOPHER #2 burnt a C++ manual.")
-				}
-			}
-		}(foundMan, foundMan2)
-	*/
-
 	go func(fire chan string) {
 		defer wg.Done()
-		for l := 0; l <= 50; l++ {
+		for l := 0; l < 50; l++ {
 			select {
 			case <-fire:
 				fmt.Println("GOPHER #1 burnt a C++ manual.")
@@ -101,7 +87,7 @@ func main() {
 
 	go func(fire2 chan string) {
 		defer wg.Done()
-		for l := 0; l <= 50; l++ {
+		for l := 0; l < 50; l++ {
 			select {
 			case <-fire2:
 				fmt.Println("GOPHER #2 burnt a C++ manual.")
