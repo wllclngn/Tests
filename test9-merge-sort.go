@@ -10,22 +10,21 @@ func mergeSort(arr []int) {
 
 		mid := len(arr) / 2
 
-		L := arr[mid:]
-		R := arr[:mid]
+		L := arr[:mid]
+		R := arr[mid:]
 
 		mergeSort(L)
 		mergeSort(R)
 
 		// i, j, k := 0, 0, 0
 
-		for i := 0; i < len(R); i++ {
-			if L[i] < R[i] {
+		for i := 0; i < len(L); i++ {
+			if L[i] > R[i] {
 				temp := L[i]
 				L[i] = R[i]
 				R[i] = temp
 			}
 		}
-
 	}
 }
 
