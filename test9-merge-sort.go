@@ -5,7 +5,7 @@ package main
 import "fmt"
 
 func mergeSort(arr []int) {
-  // return arr unnecessary due to memory address assignment
+	// return arr unnecessary due to memory address assignment
 	if len(arr) > 1 {
 
 		mid := len(arr) / 2
