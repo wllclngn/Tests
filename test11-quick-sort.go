@@ -2,10 +2,7 @@
 
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 func partition(arr []int, x int, y int) int {
 	i := (x - 1)
@@ -37,12 +34,6 @@ func main() {
 		-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12, 49, 6, 78, 99,
 		88, 48, 38, 29, 30, 133, 34, 52, 526, 664, 267, 377}
 	fmt.Println(puzzle1)
-	start := time.Now()
 	quickSort(puzzle1, 0, (len(puzzle1) - 1))
-	// start2 := time.Now()
-	// Resolves so fast time.Since() doesn't work
-	elapsed := time.Since(start)
 	fmt.Println(puzzle1)
-	fmt.Println("Start:", start)
-	fmt.Println("Elapsed:", elapsed)
 }
