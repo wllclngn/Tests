@@ -17,7 +17,6 @@ func Min(x int, y int) int {
 
 func calcMinRun(n int) int {
 	MIN_MERGE := 32
-
 	r := 0
 	for n >= MIN_MERGE {
 		r |= n & 1
