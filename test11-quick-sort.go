@@ -19,7 +19,7 @@ func partition(arr []int, x int, y int) int {
 
 func quickSort(arr []int, x int, y int) {
 	if len(arr) <= 1 {
-		panic("The input slice size is one or empty.")
+		panic("The input slice is empty or has a size of one.")
 	} else if x < y {
 		partInd := partition(arr, x, y)
 		quickSort(arr, x, partInd-1)
