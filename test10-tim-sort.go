@@ -25,50 +25,49 @@ func calcMinRun(n int) int {
 	return n + r
 }
 
-func insertionSort(arr []int, left int, right int) {
-	for i := left; i <= right; i++ {
+func insertionSort(arr []int, x int, y int) {
+	for i := x; i <= y; i++ {
 		j := i
-		for j > left && arr[j] < arr[j-1] {
+		for j > x && arr[j] < arr[j-1] {
 			arr[j], arr[j-1] = arr[j-1], arr[j]
 			j--
 		}
 	}
 }
 
-func merge(arr []int, l int, m int, r int) {
-	len1, len2 := m-l+1, r-m
-	var left []int
-	var right []int
+func merge(arr []int, x int, y int, z int) {
+	len1, len2 := y-x+1, z-y
+	var arr2, arr3 []int
 	for i := 0; i < len1; i++ {
-		left = append(left, arr[l+i])
+		arr2 = append(arr2, arr[x+i])
 	}
-	for i := 0; i < len2; i++ {
-		right = append(right, arr[m+1+i])
+	for j := 0; j < len2; j++ {
+		arr3 = append(arr3, arr[y+1+j])
 	}
 
-	i, j, k := 0, 0, l
+	a, b, c := 0, 0, x
 
-	for i < len1 && j < len2 {
-		if left[i] <= right[j] {
-			arr[k] = left[i]
-			i++
+	for a < len1 && b < len2 {
+		if arr2[a] <= arr3[b] {
+			arr[c] = arr2[a]
+			a++
 		} else {
-			arr[k] = right[j]
-			j++
+			arr[c] = arr3[b]
+			b++
 		}
-		k++
+		c++
 	}
 
-	for i < len1 {
-		arr[k] = left[i]
-		k++
-		i++
+	for a < len1 {
+		arr[c] = arr2[a]
+		c++
+		a++
 	}
 
-	for j < len2 {
-		arr[k] = right[j]
-		k++
-		j++
+	for b < len2 {
+		arr[c] = arr3[b]
+		c++
+		b++
 	}
 }
 
@@ -76,37 +75,34 @@ func timSort(arr []int) {
 	n := len(arr)
 	minRun := calcMinRun(n)
 
-	// RUN
-	for start := 0; start < n; start += minRun {
-		end := Min(start+minRun-1, n-1)
-		insertionSort(arr, start, end)
+	for i := 0; i < n; i += minRun {
+		end := Min(i+minRun-1, n-1)
+		insertionSort(arr, i, end)
 	}
 
-	size := minRun
-	for size < n {
-		for left := 0; left < n; left += (2 * size) {
-
-			mid := Min(n-1, left+size-1)
-			right := Min((left + (2 * size) - 1), (n - 1))
+	j := minRun
+	for j < n {
+		for left := 0; left < n; left += (2 * j) {
+			mid := Min(n-1, left+j-1)
+			right := Min((left + (2 * j) - 1), (n - 1))
 
 			merge(arr, left, mid, right)
 		}
-		size = 2 * size
+		j = 2 * j
 	}
-
 }
 
 func main() {
-	puzzle1 := []int{-14, -14, -13, -7, -4, -2, 0, 0, 5, 7, 7, 8, 12, 15, 15,
+	slice := []int{-14, -14, -13, -7, -4, -2, 0, 0, 5, 7, 7, 8, 12, 15, 15,
 		-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12, 49, 6, 78, 99,
 		88, 48, 38, 29, 30, 133, 34, 52, 526, 664, 267, 377}
-	fmt.Println(puzzle1)
+	fmt.Println(slice)
 	start := time.Now()
-	timSort(puzzle1)
-	start2 := time.Now()
+	timSort(slice)
+	// start2 := time.Now()
 	// Resolves so fast time.Since() doesn't work
-	// elapsed := time.Since(start)
-	fmt.Println(puzzle1)
+	elapsed := time.Since(start)
+	fmt.Println(slice)
 	fmt.Println("Start:", start)
-	fmt.Println("Elapsed:", start2)
+	fmt.Println("Elapsed:", elapsed)
 }
