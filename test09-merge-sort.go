@@ -16,13 +16,9 @@ func mergeSort(arr []int) {
 		mergeSort(L)
 		mergeSort(R)
 
-		// i, j, k := 0, 0, 0
-
 		for i := 0; i < len(L); i++ {
 			if L[i] > R[i] {
-				temp := L[i]
-				L[i] = R[i]
-				R[i] = temp
+				L[i], R[i] = R[i], L[i]
 			}
 		}
 	}
