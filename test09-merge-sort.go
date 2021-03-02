@@ -1,11 +1,10 @@
 // MERGE SORT
-// return arr unnecessary due to memory address assignment
+// returning to in future, return arr unnecessary due to memory address assignment
 
 package main
 
 import "fmt"
 
-// Runs MergeSort algorithm on a slice single
 func mergeSort(x []int) []int {
 
 	if len(x) < 2 {
@@ -15,7 +14,6 @@ func mergeSort(x []int) []int {
 	return Merge(mergeSort(x[:mid]), mergeSort(x[mid:]))
 }
 
-// Merges left and right slice into newly created slice
 func Merge(x, y []int) []int {
 
 	girth, i, j := len(x)+len(y), 0, 0
