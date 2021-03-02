@@ -6,9 +6,9 @@ import "fmt"
 
 func partition(arr []int, x int, y int) int {
 	i := (x - 1)
-	pivot := arr[y]
+	fulcrum := arr[y]
 	for j := x; j < y; j++ {
-		if arr[j] <= pivot {
+		if arr[j] <= fulcrum {
 			i++
 			arr[i], arr[j] = arr[j], arr[i]
 		}
@@ -21,9 +21,9 @@ func quickSort(arr []int, x int, y int) {
 	if len(arr) <= 1 {
 		panic("The input slice is empty or has a size of one.")
 	} else if x < y {
-		partInd := partition(arr, x, y)
-		quickSort(arr, x, partInd-1)
-		quickSort(arr, partInd+1, y)
+		ledger := partition(arr, x, y)
+		quickSort(arr, x, ledger-1)
+		quickSort(arr, ledger+1, y)
 	}
 }
 
