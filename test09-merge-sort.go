@@ -5,28 +5,49 @@ package main
 
 import "fmt"
 
-func mergeSort(arr []int) {
-	if len(arr) > 1 {
+// Runs MergeSort algorithm on a slice single
+func mergeSort(x []int) []int {
 
-		mid := len(arr) / 2
+	if len(x) < 2 {
+		return x
+	}
+	mid := (len(x)) / 2
+	return Merge(mergeSort(x[:mid]), mergeSort(x[mid:]))
+}
 
-		L := arr[:mid]
-		R := arr[mid:]
+// Merges left and right slice into newly created slice
+func Merge(x, y []int) []int {
 
-		mergeSort(L)
-		mergeSort(R)
+	girth, i, j := len(x)+len(y), 0, 0
+	slice := make([]int, girth, girth)
+	k := 0
 
-		for i := 0; i < len(L); i++ {
-			if L[i] > R[i] {
-				L[i], R[i] = R[i], L[i]
-			}
+	for i < len(x) && j < len(y) {
+		if x[i] <= y[j] {
+			slice[k] = x[i]
+			k, i = k+1, i+1
+		} else {
+			slice[k] = y[j]
+			k, j = k+1, j+1
 		}
 	}
+	for i < len(x) {
+		slice[k] = x[i]
+		k, i = k+1, i+1
+	}
+	for j < len(y) {
+		slice[k] = y[j]
+		k, j = k+1, j+1
+	}
+
+	return slice
 }
 
 func main() {
-	puzzle1 := []int{12, 11, 13, 5, 7, 6}
-	fmt.Println(puzzle1)
-	mergeSort(puzzle1)
-	fmt.Println(puzzle1)
+	slice := []int{-14, -14, -13, -7, -4, -2, 0, 0, 5, 7, 7, 8, 12, 15, 15,
+		-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12, 49, 6, 78, 99,
+		88, 48, 38, 29, 30, 133, 34, 52, 526, 664, 267, 377}
+	fmt.Println(slice)
+	slice2 := mergeSort(slice)
+	fmt.Println(slice2)
 }
