@@ -11,7 +11,7 @@ func mergeSort(x []int) []int {
 	if len(x) < 2 {
 		return x
 	}
-	mid := (len(x)) / 2
+	mid := len(x) / 2
 	return Merge(mergeSort(x[:mid]), mergeSort(x[mid:]))
 }
 
