@@ -16,9 +16,10 @@ func insertionSort(x int, arr []int) {
 }
 
 func main() {
-	numb := 5
-	puzzle1 := []int{5, 6, 2, 4, 3, 1}
+	puzzle1 := []int{-14, -14, -13, -7, -4, -2, 0, 0, 5, 7, 7, 8, 12, 15, 15,
+		-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12, 49, 6, 78, 99,
+		88, 48, 38, 29, 30, 133, 34, 52, 526, 664, 267, 377}
 	fmt.Println(puzzle1)
-	insertionSort(numb, puzzle1)
+	insertionSort(len(puzzle1)-1, puzzle1)
 	fmt.Println(puzzle1)
 }
