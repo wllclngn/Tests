@@ -1,5 +1,5 @@
 """
-import time
+import time 
     start = time.process_time()
     stop = time.process_time()
     result = stop - start
