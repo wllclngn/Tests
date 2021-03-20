@@ -57,11 +57,11 @@ func (n *Node) DFSParallel() {
 
 	wg.Add(3)
 
-	go n.ProcessNodeParallel()
-
 	go n.left.DFSParallel()
 
 	go n.right.DFSParallel()
+
+	go n.ProcessNodeParallel()
 
 }
 
