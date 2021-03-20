@@ -61,7 +61,7 @@ func (node *Node) DFSParallel() {
 
 	go node.right.DFSParallel()
 
-	//time.Sleep(time.Millisecond * 200)
+	time.Sleep(time.Millisecond * 5)
 
 	fmt.Printf("#%v 🤑💀\n", node.key)
 
@@ -75,7 +75,7 @@ func main() {
 
 	var tree Tree
 
-	for i := 1; i <= 10; i++ {
+	for i := 0; i <= 10; i++ {
 		tree.insert(i)
 	}
 
