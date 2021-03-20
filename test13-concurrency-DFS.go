@@ -45,7 +45,7 @@ func (node *Node) insert(data int) {
 	}
 }
 
-func (node *Node) DFSParallel() {
+func (node *Node) DFSconcurrent() {
 
 	defer wg.Done()
 
@@ -55,19 +55,19 @@ func (node *Node) DFSParallel() {
 
 	wg.Add(2)
 
-	go node.left.DFSParallel()
+	go node.left.DFSconcurrent()
 
-	go node.right.DFSParallel()
+	go node.right.DFSconcurrent()
 
-	fmt.Printf("#%v 🤑💀\n", node.key)
+	fmt.Printf("🤑 #%v 💀\n", node.key)
 
 }
 
 func main() {
 
-	start := time.Now()
-
 	processors := runtime.GOMAXPROCS(runtime.NumCPU())
+
+	start := time.Now()
 
 	var tree Tree
 
@@ -77,7 +77,7 @@ func main() {
 
 	wg.Add(1)
 
-	go tree.root.DFSParallel()
+	go tree.root.DFSconcurrent()
 
 	wg.Wait()
 
