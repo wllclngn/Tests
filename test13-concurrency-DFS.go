@@ -1,5 +1,4 @@
 // WEIRD, CONCURRENT DEPTH FIRST SEARCH
-// "Work in Progress"
 
 package main
 
@@ -80,7 +79,7 @@ func main() {
 
 	var tree Tree
 
-	for i := 0; i <= 14; i++ {
+	for i := 0; i <= 10; i++ {
 		tree.insert(i)
 	}
 
