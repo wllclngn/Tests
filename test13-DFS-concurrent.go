@@ -11,26 +11,40 @@ import (
 
 var wg sync.WaitGroup
 
-type Node struct {
-	Data interface{}
-
-	Sleep time.Duration
-
-	Left *Node
-
-	Right *Node
+type Tree struct {
+	root *Node
 }
 
-func NewNode(data interface{}) *Node {
+type Node struct {
+	key   int
+	left  *Node
+	right *Node
+}
 
-	node := new(Node)
+// Tree
+func (t *Tree) insert(data int) {
+	if t.root == nil {
+		t.root = &Node{key: data}
+	} else {
+		t.root.insert(data)
+	}
+}
 
-	node.Data = data
-	node.Left = nil
-	node.Right = nil
-
-	return node
-
+// Node
+func (n *Node) insert(data int) {
+	if data <= n.key {
+		if n.left == nil {
+			n.left = &Node{key: data}
+		} else {
+			n.left.insert(data)
+		}
+	} else {
+		if n.right == nil {
+			n.right = &Node{key: data}
+		} else {
+			n.right.insert(data)
+		}
+	}
 }
 
 func (n *Node) DFSParallel() {
@@ -45,9 +59,9 @@ func (n *Node) DFSParallel() {
 
 	go n.ProcessNodeParallel()
 
-	go n.Left.DFSParallel()
+	go n.left.DFSParallel()
 
-	go n.Right.DFSParallel()
+	go n.right.DFSParallel()
 
 }
 
@@ -55,7 +69,7 @@ func (n *Node) ProcessNodeParallel() {
 
 	defer wg.Done()
 
-	fmt.Printf("#%v 🚀\n", n.Data)
+	fmt.Printf("#%v 🚀\n", n.key)
 
 }
 
@@ -65,17 +79,15 @@ func main() {
 
 	processors := runtime.GOMAXPROCS(runtime.NumCPU())
 
-	root := NewNode(1)
-	root.Left = NewNode(2)
-	root.Right = NewNode(3)
-	root.Left.Left = NewNode(4)
-	root.Left.Right = NewNode(5)
-	root.Right.Left = NewNode(6)
-	root.Right.Right = NewNode(7)
+	var t Tree
+
+	for i := 1; i <= 10; i++ {
+		t.insert(i)
+	}
 
 	wg.Add(1)
 
-	go root.DFSParallel()
+	go t.root.DFSParallel()
 
 	wg.Wait()
 
