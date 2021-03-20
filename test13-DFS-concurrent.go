@@ -15,13 +15,6 @@ type Tree struct {
 	root *Node
 }
 
-type Node struct {
-	key   int
-	left  *Node
-	right *Node
-}
-
-// Tree
 func (tree *Tree) insert(data int) {
 	if tree.root == nil {
 		tree.root = &Node{key: data}
@@ -30,7 +23,12 @@ func (tree *Tree) insert(data int) {
 	}
 }
 
-// Node
+type Node struct {
+	key   int
+	left  *Node
+	right *Node
+}
+
 func (node *Node) insert(data int) {
 	if data <= node.key {
 		if node.left == nil {
