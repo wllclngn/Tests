@@ -1,4 +1,4 @@
-// WEIRD, CONCURRENT DFS
+// WEIRD, CONCURRENT DEPTH FIRST SEARCH
 
 package main
 
@@ -22,54 +22,48 @@ type Node struct {
 }
 
 // Tree
-func (t *Tree) insert(data int) {
-	if t.root == nil {
-		t.root = &Node{key: data}
+func (tree *Tree) insert(data int) {
+	if tree.root == nil {
+		tree.root = &Node{key: data}
 	} else {
-		t.root.insert(data)
+		tree.root.insert(data)
 	}
 }
 
 // Node
-func (n *Node) insert(data int) {
-	if data <= n.key {
-		if n.left == nil {
-			n.left = &Node{key: data}
+func (node *Node) insert(data int) {
+	if data <= node.key {
+		if node.left == nil {
+			node.left = &Node{key: data}
 		} else {
-			n.left.insert(data)
+			node.left.insert(data)
 		}
 	} else {
-		if n.right == nil {
-			n.right = &Node{key: data}
+		if node.right == nil {
+			node.right = &Node{key: data}
 		} else {
-			n.right.insert(data)
+			node.right.insert(data)
 		}
 	}
 }
 
-func (n *Node) DFSParallel() {
+func (node *Node) DFSParallel() {
 
 	defer wg.Done()
 
-	if n == nil {
+	if node == nil {
 		return
 	}
 
-	wg.Add(3)
+	wg.Add(2)
 
-	go n.left.DFSParallel()
+	go node.left.DFSParallel()
 
-	go n.right.DFSParallel()
+	go node.right.DFSParallel()
 
-	go n.ProcessNodeParallel()
+	//time.Sleep(time.Millisecond * 200)
 
-}
-
-func (n *Node) ProcessNodeParallel() {
-
-	defer wg.Done()
-
-	fmt.Printf("#%v 🚀\n", n.key)
+	fmt.Printf("#%v 🤑💀\n", node.key)
 
 }
 
@@ -79,18 +73,19 @@ func main() {
 
 	processors := runtime.GOMAXPROCS(runtime.NumCPU())
 
-	var t Tree
+	var tree Tree
 
 	for i := 1; i <= 10; i++ {
-		t.insert(i)
+		tree.insert(i)
 	}
 
 	wg.Add(1)
 
-	go t.root.DFSParallel()
+	go tree.root.DFSParallel()
 
 	wg.Wait()
 
 	elapsed := time.Since(start)
 	fmt.Printf("\nProcessors: %v Time elapsed: %v\n", processors, elapsed)
+
 }
