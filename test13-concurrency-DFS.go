@@ -33,8 +33,8 @@ type Node struct {
 /*
         0
      1    2
-   4  6  3  5
-8 10        7 9
+   3  5  4  6
+7 9        8 10
 */
 
 func (node *Node) insert(data int) {
@@ -47,9 +47,9 @@ func (node *Node) insert(data int) {
 		}
 	} else {
 		if (data % 2) == 0 {
-			node.left.insert(data)
-		} else {
 			node.right.insert(data)
+		} else {
+			node.left.insert(data)
 		}
 	}
 }
