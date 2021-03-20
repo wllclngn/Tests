@@ -65,12 +65,6 @@ func main() {
 
 	processors := runtime.GOMAXPROCS(runtime.NumCPU())
 
-	/*
-		for i := 0; i < 10; i++ {
-
-		}
-	*/
-
 	root := NewNode(1)
 	root.Left = NewNode(2)
 	root.Right = NewNode(3)
