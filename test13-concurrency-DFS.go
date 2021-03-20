@@ -1,4 +1,5 @@
 // WEIRD, CONCURRENT DEPTH FIRST SEARCH
+// "Work in Progress"
 
 package main
 
@@ -29,16 +30,24 @@ type Node struct {
 	right *Node
 }
 
+/*
+        0
+     1    2
+   4  6  3  5
+8 10        7 9
+*/
+
 func (node *Node) insert(data int) {
-	if data <= node.key {
+
+	if node.left == nil || node.right == nil {
 		if node.left == nil {
 			node.left = &Node{key: data}
-		} else {
-			node.left.insert(data)
+		} else if node.right == nil {
+			node.right = &Node{key: data}
 		}
 	} else {
-		if node.right == nil {
-			node.right = &Node{key: data}
+		if (data % 2) == 0 {
+			node.left.insert(data)
 		} else {
 			node.right.insert(data)
 		}
@@ -59,7 +68,7 @@ func (node *Node) DFSconcurrent() {
 
 	go node.right.DFSconcurrent()
 
-	fmt.Printf("🤑 💀 #%v\n", node.key)
+	fmt.Printf("🤑 💀 #%v LEFT: %v RIGHT: %v\n", node.key, node.left, node.right)
 
 }
 
@@ -71,7 +80,7 @@ func main() {
 
 	var tree Tree
 
-	for i := 0; i <= 10; i++ {
+	for i := 0; i <= 14; i++ {
 		tree.insert(i)
 	}
 
