@@ -61,8 +61,6 @@ func (node *Node) DFSParallel() {
 
 	go node.right.DFSParallel()
 
-	time.Sleep(time.Millisecond * 5)
-
 	fmt.Printf("#%v 🤑💀\n", node.key)
 
 }
