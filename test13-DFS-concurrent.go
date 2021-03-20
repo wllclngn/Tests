@@ -1,4 +1,4 @@
-// WEIRD< CONCURRENT DFS
+// WEIRD, CONCURRENT DFS
 
 package main
 
