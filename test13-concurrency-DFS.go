@@ -59,7 +59,7 @@ func (node *Node) DFSconcurrent() {
 
 	go node.right.DFSconcurrent()
 
-	fmt.Printf("🤑 #%v 💀\n", node.key)
+	fmt.Printf("🤑 💀 #%v\n", node.key)
 
 }
 
