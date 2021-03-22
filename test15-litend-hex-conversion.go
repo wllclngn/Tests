@@ -15,7 +15,7 @@ func lilEndToHex(b []byte) string {
 	binInt := 0
 	power := 0
 
-	for i := len(b) - 1; i > 0; i-- {
+	for i := len(b) - 1; i >= 0; i-- {
 		binInt += int(b[i]) * int(math.Pow(2, float64(power)))
 		power++
 	}
