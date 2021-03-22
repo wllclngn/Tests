@@ -1,22 +1,5 @@
 // BINARY TO HEX CONVERSION
 
-/*
-
-	uintByte := binary.BigEndian.Uint16()
-	uintByte := binary.BigEndian.Uint32()
-	uintByte := binary.BigEndian.Uint64()
-	uintByte := binary.LittleEndian.Uint64()
-	strInt := strconv.Itoa(intByte)
-
-	ui, err := strconv.ParseUint(strInt, 2, 16)
-	if err != nil {
-		fmt.Println(err)
-		return "Pretty much."
-	}
-
-	return fmt.Sprintf("%x", ui)
-*/
-
 package main
 
 import (
