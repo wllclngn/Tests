@@ -12,7 +12,7 @@ func bigLilConv(x []byte) []byte {
 
 	if (len(x) % 4) != 0 {
 		fmt.Println("ERROR:", x)
-		panic("Bit's length is not modulus of four.")
+		panic("Bits' length is not modulus of four.")
 	}
 
 	for i := 0; i < len(x)/2; i++ {
