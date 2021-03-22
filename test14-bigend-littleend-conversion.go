@@ -1,22 +1,19 @@
 // BIG END, LITTLE END BYTE CONVERSION
-// "Work in Progress"
 
 package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func bigLil() {
 
 }
 
-func lilBig(x int) int {
+func lilBig(x []byte) int {
 
-	intConv := strconv.Itoa(x)
-	if (len(intConv) % 4) != 0 {
-		fmt.Println("ERROR: " + intConv)
+	if (len(x) % 4) != 0 {
+		fmt.Println("ERROR: ", x)
 		panic("Please check the length of your bits.")
 	}
 
@@ -26,8 +23,10 @@ func lilBig(x int) int {
 }
 
 func main() {
+	var nibble []byte
+	nibble = make([]byte, 2, 2)
+	// s == []byte{0, 0, 0, 0, 0}
 	//nibble := make([]byte, 2)
-	nibble := 0x1101
 	lilBig(nibble)
 
 	/*
