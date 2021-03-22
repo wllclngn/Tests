@@ -20,7 +20,7 @@ func lilEndToHex(b []byte) string {
 		power++
 	}
 
-	fmt.Println(binInt, "is the original decimal.")
+	fmt.Println("DEC:", binInt)
 	var value []int
 	value2 := []string{"0x"}
 	if binInt > 9 {
@@ -57,7 +57,7 @@ func lilEndToHex(b []byte) string {
 		value2 = append(value2, z)
 	}
 	value3 := strings.Join(value2, "")
-	fmt.Println(value3, "is the HEX string.")
+	fmt.Println("HEX:", value3)
 	return value3
 }
 
@@ -66,15 +66,16 @@ func main() {
 	start := time.Now()
 	nibble := make([]byte, 1, 1)
 	nibble = []byte{0, 1}
-	fmt.Println(nibble, "is the original Little End Binary bits.")
+	fmt.Println("BIN:", nibble)
 
 	lilEndToHex(nibble)
 	elapsed := time.Since(start)
+	fmt.Println("Elapsed:", elapsed)
 
 	start = time.Now()
 	litBite := make([]byte, 1, 1)
 	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
-	fmt.Println(litBite, "is the original Little End Binary bits.")
+	fmt.Println("BIN:", litBite)
 
 	lilEndToHex(litBite)
 	elapsed = time.Since(start)
@@ -83,7 +84,7 @@ func main() {
 	start = time.Now()
 	litBite2 := make([]byte, 2, 2)
 	litBite2 = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println(litBite2, "is the original Little End Binary bits.")
+	fmt.Println("BIN:", litBite2)
 
 	lilEndToHex(litBite2)
 	elapsed = time.Since(start)
