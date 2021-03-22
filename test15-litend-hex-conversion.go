@@ -9,24 +9,24 @@ import (
 	"strings"
 )
 
-func litEndToHex(b []byte) string {
+/*
 
-	/*
+	uintByte := binary.BigEndian.Uint16()
+	uintByte := binary.BigEndian.Uint32()
+	uintByte := binary.BigEndian.Uint64()
+	uintByte := binary.LittleEndian.Uint64()
+	strInt := strconv.Itoa(intByte)
 
-		uintByte := binary.BigEndian.Uint16()
-		uintByte := binary.BigEndian.Uint32()
-		uintByte := binary.BigEndian.Uint64()
-		uintByte := binary.LittleEndian.Uint64()
-		strInt := strconv.Itoa(intByte)
+	ui, err := strconv.ParseUint(strInt, 2, 16)
+	if err != nil {
+		fmt.Println(err)
+		return "Pretty much."
+	}
 
-		ui, err := strconv.ParseUint(strInt, 2, 16)
-		if err != nil {
-			fmt.Println(err)
-			return "Pretty much."
-		}
+	return fmt.Sprintf("%x", ui)
+*/
 
-		return fmt.Sprintf("%x", ui)
-	*/
+func lilEndToHex(b []byte) string {
 
 	intNum := 0
 
@@ -77,24 +77,6 @@ func litEndToHex(b []byte) string {
 	return value3
 }
 
-func bigLilConv(x []byte) []byte {
-
-	// var bitter []byte
-
-	if (len(x) % 4) != 0 {
-		fmt.Println("ERROR:", x)
-		panic("Bit's length is not modulus of four.")
-	}
-
-	for i := 0; i < len(x)/2; i++ {
-		if (i % 4) == 0 {
-			x[i], x[i+1], x[i+2], x[i+3], x[len(x)-(4+i)], x[len(x)-(3+i)], x[len(x)-(2+i)], x[len(x)-(1+i)] = x[len(x)-(4+i)], x[len(x)-(3+i)], x[len(x)-(2+i)], x[len(x)-(1+i)], x[i], x[i+1], x[i+2], x[i+3]
-		}
-	}
-
-	return x
-}
-
 func main() {
 
 	/*
@@ -109,14 +91,10 @@ func main() {
 	test1 := bigLilConv(bite)
 	fmt.Println(test1)
 
-	bigBite := make([]byte, 2, 2)
-	bigBite = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println(bigBite)
-	test2 := bigLilConv(bigBite)
-	fmt.Println(test2)
-	test3 := bigLilConv(test2)
-	fmt.Println(test3)
+	litBite := make([]byte, 2, 2)
+	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println(litBite)
 
-	litEndToHex(test3)
+	lilEndToHex(litBite)
 
 }
