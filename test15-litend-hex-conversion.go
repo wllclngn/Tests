@@ -63,25 +63,27 @@ func lilEndToHex(b []byte) string {
 
 func main() {
 
-	/*
-		nibble := make([]byte, 1, 1)
-		nibble = []byte{0, 1}
-		lilBig(nibble)
-	*/
-
 	start := time.Now()
+	nibble := make([]byte, 1, 1)
+	nibble = []byte{0, 1}
+	fmt.Println(nibble, "is the original Little End Binary bits.")
+
+	lilEndToHex(nibble)
+	elapsed := time.Since(start)
+
+	start = time.Now()
 	litBite := make([]byte, 1, 1)
 	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
-	fmt.Println(litBite, "is the original Little End Binary string.")
+	fmt.Println(litBite, "is the original Little End Binary bits.")
 
 	lilEndToHex(litBite)
-	elapsed := time.Since(start)
+	elapsed = time.Since(start)
 	fmt.Println("Elapsed:", elapsed)
 
 	start = time.Now()
 	litBite2 := make([]byte, 2, 2)
 	litBite2 = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println(litBite2, "is the original Little End Binary string.")
+	fmt.Println(litBite2, "is the original Little End Binary bits.")
 
 	lilEndToHex(litBite2)
 	elapsed = time.Since(start)
