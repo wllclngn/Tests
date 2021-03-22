@@ -24,21 +24,25 @@ func lilBig(x []byte) int {
 }
 
 func main() {
-	var nibble []byte
-	nibble = make([]byte, 2, 2)
-	// s == []byte{0, 0, 0, 0, 0}
-	//nibble := make([]byte, 2)
+	//var nibble []byte
+	nibble := make([]byte, 2, 2)
+	nibble = []byte{0, 1}
 	lilBig(nibble)
 
 	/*
-		bite := 00010011
-		bigBite := 0001001101111111
+		var bite []byte
+		bite = make([]byte, 8, 8)
+		bite == []byte{0, 0, 0, 1, 0, 0, 1, 1}
+		lilBig(bite)
 
+		var bite []byte
+		bite = make([]byte, 8, 8)
+		bite == []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
+		lilBig(bite)
 
 		testLilBig2 := lilBig(bite)
 		testLilBig3 := lilBig(bigBite)
 
 		testBigLil := bigLil(testLilBig2)
 	*/
-
 }
