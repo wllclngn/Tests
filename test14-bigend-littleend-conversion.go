@@ -13,14 +13,16 @@ func bigLil() {
 
 func lilBig(x []byte) []byte {
 
-	var bitter []byte
+	var biter []byte
 
 	if (len(x) % 4) != 0 {
 		fmt.Println("ERROR:", x)
 		panic("Bit's length is not modulus of four.")
 	}
 
-	return bitter
+	// fmt.Println(x)
+
+	return biter
 }
 
 func main() {
@@ -30,11 +32,11 @@ func main() {
 		lilBig(nibble)
 	*/
 
-	bite := make([]byte, 8, 8)
+	bite := make([]byte, 1, 1)
 	bite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
 	lilBig(bite)
 
-	bigBite := make([]byte, 8, 8)
+	bigBite := make([]byte, 2, 2)
 	bigBite = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
 	lilBig(bigBite)
 
