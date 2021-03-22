@@ -27,7 +27,7 @@ func bigLilConv(x []byte) []byte {
 func main() {
 
 	/*
-		nibble := make([]byte, 2, 2)
+		nibble := make([]byte, 1, 1)
 		nibble = []byte{0, 1}
 		lilBig(nibble)
 	*/
