@@ -1,5 +1,22 @@
 // BINARY TO HEX CONVERSION
 
+/*
+
+	uintByte := binary.BigEndian.Uint16()
+	uintByte := binary.BigEndian.Uint32()
+	uintByte := binary.BigEndian.Uint64()
+	uintByte := binary.LittleEndian.Uint64()
+	strInt := strconv.Itoa(intByte)
+
+	ui, err := strconv.ParseUint(strInt, 2, 16)
+	if err != nil {
+		fmt.Println(err)
+		return "Pretty much."
+	}
+
+	return fmt.Sprintf("%x", ui)
+*/
+
 package main
 
 import (
@@ -10,7 +27,7 @@ import (
 	"time"
 )
 
-func lilEndToHex(b []byte) string {
+func binToHex(b []byte) string {
 
 	binInt := 0
 	power := 0
@@ -68,7 +85,7 @@ func main() {
 	nibble = []byte{0, 1}
 	fmt.Println("BIN:", nibble)
 
-	lilEndToHex(nibble)
+	binToHex(nibble)
 	elapsed := time.Since(start)
 	fmt.Println("Elapsed:", elapsed)
 
@@ -77,7 +94,7 @@ func main() {
 	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
 	fmt.Println("BIN:", litBite)
 
-	lilEndToHex(litBite)
+	binToHex(litBite)
 	elapsed = time.Since(start)
 	fmt.Println("Elapsed:", elapsed)
 
@@ -86,7 +103,7 @@ func main() {
 	litBite2 = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
 	fmt.Println("BIN:", litBite2)
 
-	lilEndToHex(litBite2)
+	binToHex(litBite2)
 	elapsed = time.Since(start)
 	fmt.Println("Elapsed:", elapsed)
 
