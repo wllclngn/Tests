@@ -13,7 +13,7 @@ func bigLil() {
 
 func lilBig(x []byte) []byte {
 
-	var biter []byte
+	var bitter []byte
 
 	if (len(x) % 4) != 0 {
 		fmt.Println("ERROR:", x)
@@ -22,7 +22,7 @@ func lilBig(x []byte) []byte {
 
 	// fmt.Println(x)
 
-	return biter
+	return bitter
 }
 
 func main() {
