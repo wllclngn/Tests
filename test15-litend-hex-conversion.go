@@ -10,43 +10,27 @@ import (
 	"time"
 )
 
-/*
-
-	uintByte := binary.BigEndian.Uint16()
-	uintByte := binary.BigEndian.Uint32()
-	uintByte := binary.BigEndian.Uint64()
-	uintByte := binary.LittleEndian.Uint64()
-	strInt := strconv.Itoa(intByte)
-
-	ui, err := strconv.ParseUint(strInt, 2, 16)
-	if err != nil {
-		fmt.Println(err)
-		return "Pretty much."
-	}
-
-	return fmt.Sprintf("%x", ui)
-*/
-
 func lilEndToHex(b []byte) string {
 
-	intNum := 0
+	binInt := 0
+	power := 0
 
-	for i := len(b) - 1; i < 0; i-- {
-		intByte := int(b[i])
-		intNum += intByte * int(math.Pow(2, float64(len(b)+(i-1))))
+	for i := len(b) - 1; i > 0; i-- {
+		binInt += int(b[i]) * int(math.Pow(2, float64(power)))
+		power++
 	}
 
-	fmt.Println(intNum, "is the original decimal.")
+	fmt.Println(binInt, "is the original decimal.")
 	var value []int
 	value2 := []string{"0x"}
-	if intNum > 9 {
+	if binInt > 9 {
 		for i := 0; i < 9223372036854775807; i++ {
-			if intNum >= 16 {
-				y := intNum % 16
+			if binInt >= 16 {
+				y := binInt % 16
 				value = append(value, y)
-				intNum = intNum / 16
+				binInt = binInt / 16
 			} else {
-				value = append(value, intNum)
+				value = append(value, binInt)
 				break
 			}
 		}
@@ -69,7 +53,7 @@ func lilEndToHex(b []byte) string {
 			}
 		}
 	} else {
-		z := strconv.Itoa(intNum)
+		z := strconv.Itoa(binInt)
 		value2 = append(value2, z)
 	}
 	value3 := strings.Join(value2, "")
