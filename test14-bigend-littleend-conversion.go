@@ -43,5 +43,7 @@ func main() {
 	fmt.Println(bigBite)
 	test2 := bigLilConv(bigBite)
 	fmt.Println(test2)
+	test3 := bigLilConv(test2)
+	fmt.Println(test3)
 
 }
