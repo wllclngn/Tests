@@ -31,9 +31,9 @@ func lilEndToHex(b []byte) string {
 
 	intNum := 0
 
-	for i := 0; i < len(b); i++ {
-		intByte := int(b[(len(b) - (i + 1))])
-		intNum = intNum + (intByte * int(math.Pow(2, float64(i))))
+	for i := len(b) - 1; i < 0; i-- {
+		intByte := int(b[i])
+		intNum += intByte * int(math.Pow(2, float64(len(b)+(i-1))))
 	}
 
 	fmt.Println(intNum, "is the original decimal.")
