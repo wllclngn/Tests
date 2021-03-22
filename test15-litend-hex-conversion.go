@@ -7,6 +7,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
+	"time"
 )
 
 /*
@@ -33,7 +34,6 @@ func lilEndToHex(b []byte) string {
 	for i := 0; i < len(b); i++ {
 		intByte := int(b[(len(b) - (i + 1))])
 		intNum = intNum + (intByte * int(math.Pow(2, float64(i))))
-		fmt.Println(intNum)
 	}
 
 	fmt.Println(intNum, "is the original decimal.")
@@ -85,16 +85,22 @@ func main() {
 		lilBig(nibble)
 	*/
 
-	bite := make([]byte, 1, 1)
-	bite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
-	fmt.Println(bite)
-	test1 := bigLilConv(bite)
-	fmt.Println(test1)
-
-	litBite := make([]byte, 2, 2)
-	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println(litBite)
+	start := time.Now()
+	litBite := make([]byte, 1, 1)
+	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
+	fmt.Println(litBite, "is the original Little End Binary string.")
 
 	lilEndToHex(litBite)
+	elapsed := time.Since(start)
+	fmt.Println("Elapsed:", elapsed)
+
+	start = time.Now()
+	litBite2 := make([]byte, 2, 2)
+	litBite2 = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println(litBite2, "is the original Little End Binary string.")
+
+	lilEndToHex(litBite2)
+	elapsed = time.Since(start)
+	fmt.Println("Elapsed:", elapsed)
 
 }
