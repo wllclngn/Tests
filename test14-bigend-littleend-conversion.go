@@ -13,14 +13,14 @@ func bigLil() {
 
 func lilBig(x []byte) []byte {
 
-	var byteR []byte
+	var bitter []byte
 
 	if (len(x) % 4) != 0 {
 		fmt.Println("ERROR:", x)
 		panic("Bit's length is not modulus of four.")
 	}
 
-	return byteR
+	return bitter
 }
 
 func main() {
