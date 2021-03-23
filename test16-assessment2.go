@@ -23,13 +23,8 @@ func dig(x string) string {
 			}
 		} else {
 			if i < len(x)-1 {
-				if string(x[i+1]) == ">" {
-					newString = append(newString, "<")
-					newString = append(newString, ">")
-				} else {
-					newString = append(newString, "<")
-					newString = append(newString, ">")
-				}
+				newString = append(newString, "<")
+				newString = append(newString, ">")
 			}
 		}
 	}
