@@ -33,9 +33,9 @@ func dig(x string) string {
 			}
 		}
 	}
-	value3 := strings.Join(newString, "")
-	fmt.Println(value3)
-	return value3
+	newString2 := strings.Join(newString, "")
+	fmt.Println(newString2)
+	return newString2
 }
 
 func main() {
