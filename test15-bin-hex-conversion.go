@@ -70,7 +70,7 @@ func main() {
 
 	binToHex(nibble)
 	elapsed := time.Since(start)
-	fmt.Println("Elapsed:", elapsed)
+	fmt.Println("Elapsed:", elapsed, "\n")
 
 	start = time.Now()
 	litBite := make([]byte, 1, 1)
@@ -79,7 +79,7 @@ func main() {
 
 	binToHex(litBite)
 	elapsed = time.Since(start)
-	fmt.Println("Elapsed:", elapsed)
+	fmt.Println("Elapsed:", elapsed, "\n")
 
 	start = time.Now()
 	litBite2 := make([]byte, 2, 2)
@@ -88,6 +88,15 @@ func main() {
 
 	binToHex(litBite2)
 	elapsed = time.Since(start)
-	fmt.Println("Elapsed:", elapsed)
+	fmt.Println("Elapsed:", elapsed, "\n")
+
+	start = time.Now()
+	litBite3 := make([]byte, 2, 2)
+	litBite3 = []byte{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println("BIN:", litBite3)
+
+	binToHex(litBite3)
+	elapsed = time.Since(start)
+	fmt.Println("Elapsed:", elapsed, "\n")
 
 }
