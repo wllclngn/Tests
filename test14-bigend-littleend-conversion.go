@@ -19,12 +19,12 @@ func bigLilConv(x []byte) []byte {
 	for i := 0; i < len(x)/2; i++ {
 		if (i % 4) == 0 {
 
-			// x[i], x[i+1], x[i+2], x[i+3], x[len(x)-(4+i)], x[len(x)-(3+i)], x[len(x)-(2+i)], x[len(x)-(1+i)] = x[len(x)-(4+i)], x[len(x)-(3+i)], x[len(x)-(2+i)], x[len(x)-(1+i)], x[i], x[i+1], x[i+2], x[i+3]
+			// x[i], x[i+1], x[i+2], x[i+3], x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)] = x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)], x[i], x[i+1], x[i+2], x[i+3]
 
-			x[i], x[len(x)-(4+i)] = x[len(x)-(4+i)], x[i]
-			x[i+1], x[len(x)-(3+i)] = x[len(x)-(3+i)], x[i+1]
-			x[i+2], x[len(x)-(2+i)] = x[len(x)-(2+i)], x[i+2]
-			x[i+3], x[len(x)-(1+i)] = x[len(x)-(1+i)], x[i+3]
+			x[i+0], x[len(x)-(i+4)] = x[len(x)-(i+4)], x[i+0]
+			x[i+1], x[len(x)-(i+3)] = x[len(x)-(i+3)], x[i+1]
+			x[i+2], x[len(x)-(i+2)] = x[len(x)-(i+2)], x[i+2]
+			x[i+3], x[len(x)-(i+1)] = x[len(x)-(i+1)], x[i+3]
 
 		}
 	}
@@ -38,7 +38,7 @@ func main() {
 		var nibble []byte
 		nibble := make([]byte, 1, 1)
 		nibble = []byte{0, 1}
-		lilBig(nibble)
+		bigLilConv(nibble)
 	*/
 
 	bite := make([]byte, 1, 1)
