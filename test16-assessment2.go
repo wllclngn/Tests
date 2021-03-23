@@ -26,25 +26,21 @@ func dig(x string) string {
 		}
 	}
 	newString2 := strings.Join(newString, "")
-	newlen := len(newString2) / 2
-	fmt.Println(newlen, " ", newString2)
+	fmt.Println(newString2 + "\n")
 	return newString2
 }
 
 func main() {
-	/*
-		this := "><><<>>>>>"
-		fmt.Println(this)
-		dig(this)
-		this2 := ">>>>>>>>"
-		fmt.Println(this2)
-		dig(this2)
-		this3 := "<<<<<<<<"
-		fmt.Println(this3)
-		dig(this3)
-	*/
+	this := "><><<>>>>>"
+	fmt.Println(this)
+	dig(this)
+	this2 := ">>>>>>>>"
+	fmt.Println(this2)
+	dig(this2)
+	this3 := "<<<<<<<<"
+	fmt.Println(this3)
+	dig(this3)
 	this4 := "<<<<<<<<<<<<<<<<<>><><>>><>><<<<<<<<>>><<<><>>><<"
-	lenthis4 := len(this4)
-	fmt.Println(this4, " ", lenthis4)
+	fmt.Println(this4)
 	dig(this4)
 }
