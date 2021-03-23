@@ -25,7 +25,6 @@ func TestHelloEmpty(t *testing.T) {
 }
 
 func Hello(x string) (string, error) {
-
 	if x == "" {
 		return "", errors.New("empty name")
 	}
