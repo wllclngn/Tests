@@ -12,13 +12,13 @@ func dig(x string) string {
 	for i := 0; i < len(x); i++ {
 		if string(x[i]) == "<" {
 			if i < len(x)-1 {
-				if string(x[i+1]) == "<" {
-					newString = append(newString, "<")
-					newString = append(newString, ">")
-				} else {
+				if string(x[i+1]) == ">" {
 					newString = append(newString, "<")
 					newString = append(newString, ">")
 					i++
+				} else {
+					newString = append(newString, "<")
+					newString = append(newString, ">")
 				}
 			}
 		} else {
