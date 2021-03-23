@@ -1,4 +1,4 @@
-<img src='https://raw.githubusercontent.com/wllclngn/Tests/main/golang-gopher-testdummy.png' height="150" />
+<img align='center' src='https://raw.githubusercontent.com/wllclngn/Tests/main/golang-gopher-testdummy.png' height="150" />
 
 # Tests
 
