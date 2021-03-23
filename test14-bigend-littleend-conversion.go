@@ -8,8 +8,6 @@ import (
 
 func bigLilConv(x []byte) []byte {
 
-	// var bitter []byte
-
 	if (len(x) % 4) != 0 {
 		fmt.Println("ERROR:", x)
 		panic("Bits' length is not modulus of four.")
@@ -27,6 +25,7 @@ func bigLilConv(x []byte) []byte {
 func main() {
 
 	/*
+		var nibble []byte
 		nibble := make([]byte, 1, 1)
 		nibble = []byte{0, 1}
 		lilBig(nibble)
@@ -45,5 +44,13 @@ func main() {
 	fmt.Println(test2)
 	test3 := bigLilConv(test2)
 	fmt.Println(test3)
+
+	biggerBite := make([]byte, 2, 2)
+	biggerBite = []byte{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println(biggerBite)
+	test4 := bigLilConv(biggerBite)
+	fmt.Println(test4)
+	test5 := bigLilConv(test4)
+	fmt.Println(test5)
 
 }
