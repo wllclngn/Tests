@@ -2,4 +2,4 @@
 
 # Tests
 
-Tests for working w/ primarily Go, as well as Python, etc. This is an area where 
+This repository is for runnable tests written primarily in Go, as well as Python, Java, etal. Said repository is to encourage personal development and growth in the Go language, and share said ventures. While learning Go, they are also exercises in continuing to learn, and refresh, fundamentals of computer science via programming.
