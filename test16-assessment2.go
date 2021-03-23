@@ -11,20 +11,16 @@ func dig(x string) string {
 	completions := 0
 
 	for i := 0; i < len(x); i++ {
-		if string(x[i]) == "<" {
-			if i == len(x)-1 {
-				newString = append(newString, "<>")
-			} else {
-				if string(x[i+1]) == ">" {
-					newString = append(newString, "<>")
-					completions++
-					i++
-				} else {
-					newString = append(newString, "<>")
-				}
-			}
-		} else {
+		if i == len(x)-1 {
 			newString = append(newString, "<>")
+		} else {
+			if string(x[i]) == "<" && string(x[i+1]) == ">" {
+				newString = append(newString, "<>")
+				completions++
+				i++
+			} else {
+				newString = append(newString, "<>")
+			}
 		}
 	}
 	newString2 := strings.Join(newString, "")
