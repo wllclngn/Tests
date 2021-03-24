@@ -1,5 +1,3 @@
-// SHELL SORT
-
 package main
 
 import (
@@ -35,7 +33,15 @@ func shellSort(x []int) {
 	n, gaps, k := len(x), []int{1}, 1
 
 	for {
-		gap := element(2, k) + 1
+		a, b, c := k, 2, 1
+		for a > 0 {
+			if a&1 != 0 {
+				c *= b
+			}
+			a >>= 1
+			b *= b
+		}
+		gap := c + 1
 		if gap > n-1 {
 			break
 		}
@@ -45,25 +51,11 @@ func shellSort(x []int) {
 
 	for _, gap := range gaps {
 		for i := gap; i < n; i += gap {
-			j := i
-			for j > 0 {
+			for j := i; j > 0; j -= gap {
 				if x[j-gap] > x[j] {
 					x[j-gap], x[j] = x[j], x[j-gap]
 				}
-				j = j - gap
 			}
 		}
 	}
-}
-
-func element(a, b int) int {
-	e := 1
-	for b > 0 {
-		if b&1 != 0 {
-			e *= a
-		}
-		b >>= 1
-		a *= a
-	}
-	return e
 }
