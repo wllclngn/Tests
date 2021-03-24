@@ -28,7 +28,7 @@ func TestMain(t *testing.T) {
 }
 
 func shellSort(x []int) {
-	n, gaps, k := len(x), []int{1}, 1
+	n, k, gaps := len(x), 1, []int{1}
 
 	for {
 		a, b, c := k, 2, 1
