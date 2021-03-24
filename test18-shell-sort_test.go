@@ -3,13 +3,11 @@ package main
 import (
 	"math/rand"
 	"testing"
-	"time"
 )
 
 func TestMain(t *testing.T) {
 
 	slice := make([]int, 100, 100)
-	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < len(slice); i++ {
 		slice[i] = rand.Intn(999) - rand.Intn(999)
 	}
