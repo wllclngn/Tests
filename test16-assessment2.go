@@ -13,6 +13,7 @@ func dig(x string) string {
 	for i := 0; i < len(x); i++ {
 		if i == len(x)-1 {
 			newString = append(newString, "<>")
+			break
 		} else {
 			if string(x[i]) == "<" && string(x[i+1]) == ">" {
 				newString = append(newString, "<>")
@@ -30,15 +31,15 @@ func dig(x string) string {
 }
 
 func main() {
-	this := "><><<>>>>>"
+	this := ">>>>>>>>"
 	thisLen := len(this)
 	fmt.Println("LEN:", thisLen, "\nORIGINAL:", this)
 	dig(this)
-	this2 := ">>>>>>>>"
+	this2 := "<<<<<<<<"
 	thisLen2 := len(this2)
 	fmt.Println("LEN:", thisLen2, "\nORIGINAL:", this2)
 	dig(this2)
-	this3 := "<<<<<<<<"
+	this3 := "><><<>>>>>"
 	thisLen3 := len(this3)
 	fmt.Println("LEN:", thisLen3, "\nORIGINAL:", this3)
 	dig(this3)
