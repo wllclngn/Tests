@@ -3,31 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
-
-/*
-func TestMain(t *testing.T) {
-
-	slice := make([]int, 100, 100)
-	for i := 0; i < len(slice); i++ {
-		slice[i] = rand.Intn(999) - rand.Intn(999)
-	}
-
-	shellSort(slice)
-
-	//slice[1] = 1000
-
-	for i := 0; i < len(slice); i++ {
-		if i < len(slice)-1 {
-			if slice[i] > slice[i+1] {
-				t.Log("ERROR: Solution is incorrect. Please check shellSort()'s accuracy.")
-				t.FailNow()
-			}
-		}
-	}
-
-}
-*/
 
 func shellSort(x []int) []int {
 	n, k, gaps := len(x), 1, []int{1}
@@ -63,12 +40,15 @@ func shellSort(x []int) []int {
 
 func main() {
 
-	slice := make([]int, 50, 50)
+	slice := make([]int, 100, 100)
 	for i := 0; i < len(slice); i++ {
 		slice[i] = rand.Intn(50) - rand.Intn(50)
 	}
 
+	start := time.Now()
 	slicer := shellSort(slice)
+	elapsed := time.Since(start)
+	fmt.Printf("Time elapsed: %v\n", elapsed)
 	fmt.Println(slicer)
 
 }
