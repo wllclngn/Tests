@@ -1,4 +1,4 @@
-// BINARY SEARCH, ALPHABETIC
+// BINARY SEARCH, ALPHABETIC, IRREGARDLESS OF CASING
 
 package main
 
@@ -38,7 +38,7 @@ func main() {
     sought := "HIPPO"
     i := binSearch(sought, searched)
     if i > 0 {
-        fmt.Println("SEARCH:", sought, "\nINDEX:", i, "\nSLICE LIBRARY MATCH:", searched[i])
+        fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", i, "\nSLICE LIBRARY MATCH:", searched[i])
     } else {
         fmt.Println(sought, "was not found in the slice's library!")
     }
