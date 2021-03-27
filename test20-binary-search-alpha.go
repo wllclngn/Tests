@@ -17,7 +17,7 @@ func binSearch(x string, y []string) int {
                 return point
             case strings.Compare(x, y[point]) == -1:
                 high = point - 1
-            default:
+            case strings.Compare(x, y[point]) == 1:
                 low = point + 1
         }
     }
@@ -34,13 +34,13 @@ func main() {
         "orangutan",
         "rhino",
     }
-    fmt.Println("Sorted slice:", searched)
-    sought := "aardvark"
+    fmt.Println("SORTED SLICE LIBRARY:", searched)
+    sought := "HIPPO"
     i := binSearch(sought, searched)
     switch {
         case i < 0:
-            fmt.Println("The word", sought, "could not be found!")
+            fmt.Println(sought, "was not found in the slice's library!")
         default:
-            fmt.Println("The word", sought, "was found at index:", i, searched[i])
+            fmt.Println("SEARCH:", sought, "\nINDEX:", i, "\nSLICE LIBRARY MATCH:", searched[i])
     }
 }
