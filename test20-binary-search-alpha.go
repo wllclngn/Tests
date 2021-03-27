@@ -1,4 +1,4 @@
-// BINARY SEARCH, ALPHABET
+// BINARY SEARCH, ALPHABETIC
 
 package main
 
@@ -11,13 +11,11 @@ func binSearch(x string, y []string) int {
 
     for low <= high {
         point := low + (high-low)/2
-        xl := strings.ToLower(x)
-        m := strings.ToLower(y[point])
 
         switch {
-            case xl == m:
+            case strings.EqualFold(x, y[point]):
                 return point
-            case xl < m:
+            case strings.Compare(x, y[point]) == -1:
                 high = point - 1
             default:
                 low = point + 1
@@ -37,7 +35,7 @@ func main() {
         "rhino",
     }
     fmt.Println("Sorted slice:", searched)
-    sought := "rhino"
+    sought := "aardvark"
     i := binSearch(sought, searched)
     switch {
         case i < 0:
