@@ -39,9 +39,10 @@ func main() {
     fmt.Println("Sorted slice:", searched)
     sought := "rhino"
     i := binSearch(sought, searched)
-    if i < 0 {
-      fmt.Println("The word", sought, "could not be found!")
-    } else {
-      fmt.Println("The word", sought, "was found at index:", i, searched[i])
+    switch {
+        case i < 0:
+            fmt.Println("The word", sought, "could not be found!")
+        default:
+            fmt.Println("The word", sought, "was found at index:", i, searched[i])
     }
 }
