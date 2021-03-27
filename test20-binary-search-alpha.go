@@ -6,19 +6,19 @@ import "fmt"
 import "strings"
 
 func binSearch(x string, y []string) int {
-    low := 0
     high := len(y) - 1
+    low := 0
 
-    for low <= high {
-        point := low + (high-low)/2
+    for high >= low {
+        point := ((high-low)/2) + low
 
         switch {
             case strings.EqualFold(x, y[point]):
                 return point
-            case strings.Compare(x, y[point]) == 1:
-                low = point + 1
             case strings.Compare(x, y[point]) == -1:
                 high = point - 1
+            case strings.Compare(x, y[point]) == 1:
+                low = point + 1
         }
     }
     return -1
