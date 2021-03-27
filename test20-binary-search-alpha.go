@@ -37,9 +37,9 @@ func main() {
     fmt.Println("SORTED SLICE LIBRARY:", searched)
     sought := "HIPPO"
     i := binSearch(sought, searched)
-    if i < 0 {
-        fmt.Println(sought, "was not found in the slice's library!")
-    } else {
+    if i > 0 {
         fmt.Println("SEARCH:", sought, "\nINDEX:", i, "\nSLICE LIBRARY MATCH:", searched[i])
+    } else {
+        fmt.Println(sought, "was not found in the slice's library!")
     }
 }
