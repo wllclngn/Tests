@@ -15,10 +15,10 @@ func binSearch(x string, y []string) int {
         switch {
             case strings.EqualFold(x, y[point]):
                 return point
-            case strings.Compare(x, y[point]) == -1:
-                high = point - 1
             case strings.Compare(x, y[point]) == 1:
                 low = point + 1
+            case strings.Compare(x, y[point]) == -1:
+                high = point - 1
         }
     }
     return -1
