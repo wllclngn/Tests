@@ -82,7 +82,6 @@ func main() {
 			data_str2 = append(data_str2, data_str[l])
 		}
 	}
-	fmt.Println("INPUT DATA:", data_str2)
 	searched := shellSort(data_str2)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
 	sought := "maRSupial"
