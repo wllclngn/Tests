@@ -1,5 +1,4 @@
 // Import file, sort it and search over file contents...
-// Updates incoming
 
 package main
 
@@ -50,6 +49,7 @@ func binSearch(x string, y []string) int {
 
 		switch {
 		case strings.EqualFold(x, y[point]):
+			fmt.Println(point)
 			return point
 		case strings.Compare(x, y[point]) == -1:
 			high = point - 1
@@ -81,16 +81,16 @@ func main() {
 	// REMOVE ""s from data_str
 	var data_str2 []string
 	for l := 0; l < len(data_str); l++ {
-		if data_str[l] == "" {
-			continue
-		} else {
+		if data_str[l] != "" {
 			data_str2 = append(data_str2, data_str[l])
+		} else {
+			continue
 		}
 	}
 	fmt.Println("INPUT DATA:", data_str2)
 	searched := shellSort(data_str2)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
-	sought := "hippo"
+	sought := "Marsupial"
 	m := binSearch(sought, searched)
 	if m > 0 {
 		fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
