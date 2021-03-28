@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"time"
 )
 
 func shellSort(x []string) []string {
@@ -61,7 +60,6 @@ func binSearch(x string, y []string) int {
 }
 
 func main() {
-	start := time.Now()
 	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
@@ -78,16 +76,12 @@ func main() {
 			setup = setup + string(data[j])
 		}
 	}
-	//fmt.Println("INPUT DATA:", data_str)
 	searched := shellSort(data_str)
-	fmt.Println("SORTED SLICE LIBRARY:", searched)
-	sought := "maRSupial"
+	sought := "marsupial"
 	m := binSearch(sought, searched)
 	if m >= 0 {
 		fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
 	} else {
 		fmt.Println(sought, "was not found in the slice's library!")
 	}
-	elapsed := time.Since(start)
-	fmt.Println("ELAPSED TIME:", elapsed)
 }
