@@ -1,4 +1,4 @@
-// Import file, sort it and search over file contents...
+// IMPORT, MANIPULATE AND SEARCH DATA
 
 package main
 
@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"time"
 )
 
 func shellSort(x []string) []string {
@@ -49,7 +50,6 @@ func binSearch(x string, y []string) int {
 
 		switch {
 		case strings.EqualFold(x, y[point]):
-			fmt.Println(point)
 			return point
 		case strings.Compare(x, y[point]) == -1:
 			high = point - 1
@@ -61,6 +61,7 @@ func binSearch(x string, y []string) int {
 }
 
 func main() {
+	start := time.Now()
 	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
@@ -91,4 +92,6 @@ func main() {
 	} else {
 		fmt.Println(sought, "was not found in the slice's library!")
 	}
+	elapsed := time.Since(start)
+	fmt.Println("ELAPSED TIME:", elapsed)
 }
