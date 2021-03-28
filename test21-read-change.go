@@ -90,9 +90,9 @@ func main() {
 	fmt.Println("INPUT DATA:", data_str2)
 	searched := shellSort(data_str2)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
-	sought := "Marsupial"
+	sought := "okokokok"
 	m := binSearch(sought, searched)
-	if m > 0 {
+	if m >= 0 {
 		fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
 	} else {
 		fmt.Println(sought, "was not found in the slice's library!")
