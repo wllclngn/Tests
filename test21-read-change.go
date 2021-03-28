@@ -80,6 +80,7 @@ func main() {
 			data_str[k] = data_str[k] + string(data[j])
 		}
 	}
+	// REMOVE ""s from data_str
 	var data_str2 []string
 	for l := 0; l < len(data_str); l++ {
 		if data_str[l] == "" {
@@ -88,9 +89,9 @@ func main() {
 			data_str2 = append(data_str2, data_str[l])
 		}
 	}
-	fmt.Println("DERP", data_str2)
-	fmt.Println("INPUT DATA:", data_str2)
-	searched := shellSort(data_str2)
+	fmt.Println("DERP", data_str)
+	fmt.Println("INPUT DATA:", data_str)
+	searched := shellSort(data_str)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
 	sought := "hippo"
 	m := binSearch(sought, searched)
