@@ -61,13 +61,11 @@ func binSearch(x string, y []string) int {
 }
 
 func main() {
-	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
-	// data, err := ioutil.ReadFile("/run/media/EXTHD/DOCUMENTS [EXTHD]/tester.txt")
+	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
 	}
-	fmt.Println(data)
 	data_str := make([]string, len(data))
 	k := 0
 	for j := 0; j < len(data); j++ {
