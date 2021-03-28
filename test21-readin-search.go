@@ -3,7 +3,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"strings"
@@ -67,20 +66,23 @@ func main() {
 		fmt.Println("File input ERROR:", err)
 		return
 	}
-	data = bytes.Trim(data, "\x10")
-	fmt.Println(data)
 	data_str := make([]string, len(data))
 	k := 0
 	for j := 0; j < len(data_str); j++ {
-		switch {
-		case data[j] == 10:
+		if data[j] == 10 {
 			k++
-		default:
+		} else {
 			data_str[k] = data_str[k] + string(data[j])
 		}
 	}
-	fmt.Println("INPUT DATA:", data_str)
-	searched := shellSort(data_str)
+	var data_str2 []string
+	for l := 0; l < len(data_str); l++ {
+		if data_str[l] != "" {
+			data_str2 = append(data_str2, data_str[l])
+		}
+	}
+	fmt.Println("INPUT DATA:", data_str2)
+	searched := shellSort(data_str2)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
 	sought := "maRSupial"
 	m := binSearch(sought, searched)
