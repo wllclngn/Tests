@@ -59,8 +59,7 @@ func binSearch(x string, y []string) int {
 }
 
 func main() {
-	//start := time.Now()
-	data, err := ioutil.ReadFile("[FILE")
+	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -77,13 +76,11 @@ func main() {
 		}
 	}
 	searched := shellSort(data_str)
-	sought := "maRSUPIAL"
+	sought := "marsupial"
 	m := binSearch(sought, searched)
 	if m != -1 {
-		fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
+		fmt.Println("SEARCH:", "\""+sought+"\"", "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
 	} else {
-		fmt.Println(sought, "was not found in the slice's library!")
+		fmt.Println("\""+sought+"\"", "has no match the slice's library!")
 	}
-	//elapsed := time.Since(start)
-	//fmt.Println("ELAPSED TIME:", elapsed)
 }
