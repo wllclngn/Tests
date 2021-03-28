@@ -41,12 +41,11 @@ func shellSort(x []string) []string {
 }
 
 func binSearch(x string, y []string) int {
-	high := len(y) - 1
 	low := 0
+	high := len(y) - 1
 
-	for high >= low {
-		point := ((high - low) / 2) + low
-
+	for low <= high {
+		point := (low + high) / 2
 		switch {
 		case strings.EqualFold(x, y[point]):
 			return point
@@ -60,7 +59,8 @@ func binSearch(x string, y []string) int {
 }
 
 func main() {
-	data, err := ioutil.ReadFile("[FILE]")
+	//start := time.Now()
+	data, err := ioutil.ReadFile("[FILE")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -77,11 +77,13 @@ func main() {
 		}
 	}
 	searched := shellSort(data_str)
-	sought := "marsupial"
+	sought := "maRSUPIAL"
 	m := binSearch(sought, searched)
-	if m >= 0 {
+	if m != -1 {
 		fmt.Println("SEARCH:", sought, "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
 	} else {
 		fmt.Println(sought, "was not found in the slice's library!")
 	}
+	//elapsed := time.Since(start)
+	//fmt.Println("ELAPSED TIME:", elapsed)
 }
