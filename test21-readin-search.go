@@ -79,8 +79,8 @@ func main() {
 	sought := "marsupial"
 	m := binSearch(sought, searched)
 	if m != -1 {
-		fmt.Println("SEARCH:", "\""+sought+"\"", "\nINDEX RESULT:", m, "\nSLICE LIBRARY MATCH:", searched[m])
+		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, m, searched[m])
 	} else {
-		fmt.Println("\""+sought+"\"", "has no match the slice's library!")
+		fmt.Printf("\"%v\" has no match the slice's library!", sought)
 	}
 }
