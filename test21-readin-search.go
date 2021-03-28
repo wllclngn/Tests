@@ -67,22 +67,19 @@ func main() {
 		fmt.Println("File input ERROR:", err)
 		return
 	}
-	data_str := make([]string, len(data))
-	k := 0
-	for j := 0; j < len(data_str); j++ {
+	// CONVERT DATA TO []string, TRIM "\n" CHARACTERS
+	var data_str []string
+	setup := ""
+	for j := 0; j < len(data); j++ {
 		if data[j] == 10 {
-			k++
+			data_str = append(data_str, setup)
+			setup = ""
 		} else {
-			data_str[k] = data_str[k] + string(data[j])
+			setup = setup + string(data[j])
 		}
 	}
-	var data_str2 []string
-	for l := 0; l < len(data_str); l++ {
-		if data_str[l] != "" {
-			data_str2 = append(data_str2, data_str[l])
-		}
-	}
-	searched := shellSort(data_str2)
+	//fmt.Println("INPUT DATA:", data_str)
+	searched := shellSort(data_str)
 	fmt.Println("SORTED SLICE LIBRARY:", searched)
 	sought := "maRSupial"
 	m := binSearch(sought, searched)
