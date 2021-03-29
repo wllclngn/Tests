@@ -6,7 +6,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"sync"
 )
 
 // GLOBAL CHANNEL
@@ -51,7 +50,7 @@ func shellSort(x []string) []string {
 	return x
 }
 
-func binSearch(x string, y []string, l int, r int) int {
+func binSearch(x string, y []string, l int, r int) chan int {
 
 	if r >= l {
 		mid := l + (r-l)/2
@@ -61,10 +60,14 @@ func binSearch(x string, y []string, l int, r int) int {
 		}
 
 		if y[mid] > x {
-			return binSearch(x, y, l, mid-1)
+			intSl <- binSearch(x, y, l, mid-1)
+			fmt.Printf("%v is the found int", intSl)
+			return intSl
 		}
 
-		return binSearch(x, y, mid+1, r)
+		intSl <- binSearch(x, y, mid+1, r)
+		fmt.Printf("%v is the found int", intSl)
+		return intSl
 	}
 
 	return -1
@@ -83,12 +86,12 @@ func expoSearch(x string, y []string) int {
 	}
 
 	intSl <- binSearch(x, y, (i / 2), Min(i, len(y)))
+	fmt.Printf("%v is the found int", intSl)
 	return -1
 }
 
 func main() {
-	wg := &sync.WaitGroup{}
-	data, err := ioutil.ReadFile("[FILE]")
+	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -106,10 +109,9 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	sought := "marsupial"
-	wg.Add(1)
-	go expoSearch(sought, searched)
-	if len(intSl) != 0 {
-		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[int(intSl)])
+	m := expoSearch(sought, searched)
+	if m != -1 {
+		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[m])
 	} else {
 		fmt.Printf("\"%v\" has no match the slice's library!", sought)
 	}
