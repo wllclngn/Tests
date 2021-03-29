@@ -8,6 +8,9 @@ import (
 	"io/ioutil"
 )
 
+// GLOBAL CHANNEL
+var intSl = make(chan int)
+
 func Min(x int, y int) int {
 	if x < y {
 		return x
@@ -48,6 +51,7 @@ func shellSort(x []string) []string {
 }
 
 func binSearch(x string, y []string, l int, r int) int {
+
 	if r >= l {
 		mid := l + (r-l)/2
 
@@ -65,10 +69,11 @@ func binSearch(x string, y []string, l int, r int) int {
 	return -1
 }
 
-func expoSearch(x string, y []string) []int {
+func expoSearch(x string, y []string) int {
 
+	n := len(y) / len(y[0])
 	if y[0] == x {
-		return []int{0}
+		return 0
 	}
 
 	i := 1
@@ -76,12 +81,12 @@ func expoSearch(x string, y []string) []int {
 		i = i * 2
 	}
 
-	intSl = append(intSl, binarySearch(x, y, i/2, Min(i, len(y))))
-	return intSl
+	intSl <- binSearch(x, y, (i / 2), Min(i, len(y)))
+	return -1
 }
 
 func main() {
-	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
+	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -99,9 +104,9 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	sought := "marsupial"
-	m := binSearch(sought, searched)
-	if m != -1 {
-		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, m, searched[m])
+	go expoSearch(sought, searched)
+	if m[0] != -1 {
+		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, m, searched[0])
 	} else {
 		fmt.Printf("\"%v\" has no match the slice's library!", sought)
 	}
