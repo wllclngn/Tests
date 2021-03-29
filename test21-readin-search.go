@@ -5,8 +5,14 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"strings"
 )
+
+func Min(x int, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
 
 func shellSort(x []string) []string {
 	n, k, gaps := len(x), 1, []int{1}
@@ -40,26 +46,41 @@ func shellSort(x []string) []string {
 	return x
 }
 
-func binSearch(x string, y []string) int {
-	low := 0
-	high := len(y) - 1
+func binSearch(x string, y []string, l int, r int) int {
+	if r >= l {
+		mid := l + (r-l)/2
 
-	for low <= high {
-		point := (low + high) / 2
-		switch {
-		case strings.EqualFold(x, y[point]):
-			return point
-		case strings.Compare(x, y[point]) == -1:
-			high = point - 1
-		case strings.Compare(x, y[point]) == 1:
-			low = point + 1
+		if y[mid] == x {
+			return mid
 		}
+
+		if y[mid] > x {
+			return binSearch(x, y, l, mid-1)
+		}
+
+		return binSearch(x, y, mid+1, r)
 	}
+
 	return -1
 }
 
+func expoSearch(x string, y []string) []int {
+
+	if y[0] == x {
+		return []int{0}
+	}
+
+	i := 1
+	for i < n && y[i] <= x {
+		i = i * 2
+	}
+
+	intSl = append(intSl, binarySearch(x, y, i/2, Min(i, len(y))))
+	return intSl
+}
+
 func main() {
-	data, err := ioutil.ReadFile("[FILE]")
+	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
