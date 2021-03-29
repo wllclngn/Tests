@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"sync"
 )
 
 // GLOBAL CHANNEL
@@ -86,6 +87,7 @@ func expoSearch(x string, y []string) int {
 }
 
 func main() {
+	wg := &sync.WaitGroup{}
 	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
@@ -104,9 +106,10 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	sought := "marsupial"
+	wg.Add(1)
 	go expoSearch(sought, searched)
-	if m[0] != -1 {
-		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, m, searched[0])
+	if len(intSl) != 0 {
+		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[int(intSl)])
 	} else {
 		fmt.Printf("\"%v\" has no match the slice's library!", sought)
 	}
