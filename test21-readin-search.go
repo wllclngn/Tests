@@ -8,9 +8,6 @@ import (
 	"io/ioutil"
 )
 
-// GLOBAL CHANNEL
-var intSl = make(chan int)
-
 func Min(x int, y int) int {
 	if x < y {
 		return x
@@ -50,26 +47,20 @@ func shellSort(x []string) []string {
 	return x
 }
 
-func binSearch(x string, y []string, l int, r int) chan int {
+func binSearch(x string, y []string, l int, r int) int {
 
-	if r >= l {
-		mid := l + (r-l)/2
+	for r >= l {
+		point := ((r - l) / 2) + l
 
-		if y[mid] == x {
-			return mid
+		switch {
+		case y[point] == x:
+			return point
+		case y[point] > x:
+			binSearch(x, y, l+1, r)
+		default:
+			binSearch(x, y, l, r-1)
 		}
-
-		if y[mid] > x {
-			intSl <- binSearch(x, y, l, mid-1)
-			fmt.Printf("%v is the found int", intSl)
-			return intSl
-		}
-
-		intSl <- binSearch(x, y, mid+1, r)
-		fmt.Printf("%v is the found int", intSl)
-		return intSl
 	}
-
 	return -1
 }
 
@@ -85,13 +76,11 @@ func expoSearch(x string, y []string) int {
 		i = i * 2
 	}
 
-	intSl <- binSearch(x, y, (i / 2), Min(i, len(y)))
-	fmt.Printf("%v is the found int", intSl)
-	return -1
+	return binSearch(x, y, (i / 2), Min(i, len(y)))
 }
 
 func main() {
-	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
+	data, err := ioutil.ReadFile("[FILE]")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -108,11 +97,12 @@ func main() {
 		}
 	}
 	searched := shellSort(data_str)
-	sought := "marsupial"
-	m := expoSearch(sought, searched)
-	if m != -1 {
-		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[m])
+	fmt.Println(searched)
+	sought := "shrimp"
+	intSl := expoSearch(sought, searched)
+	if intSl != -1 {
+		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
 	} else {
-		fmt.Printf("\"%v\" has no match the slice's library!", sought)
+		fmt.Printf("\"%v\" has no match the slice's library! %v is the result.", sought, intSl)
 	}
 }
