@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"strings"
 )
 
 func Min(x int, y int) int {
@@ -53,14 +54,17 @@ func binSearch(x string, y []string, l int, r int) int {
 		point := ((r - l) / 2) + l
 
 		switch {
-		case y[point] == x:
+
+		case strings.Compare(x, y[point]) == 0:
 			return point
-		case y[point] > x:
-			binSearch(x, y, l+1, r)
+		case strings.Compare(x, y[point]) == -1:
+			return binSearch(x, y, l+1, r)
 		default:
-			binSearch(x, y, l, r-1)
+			return binSearch(x, y, l, r-1)
+
 		}
 	}
+	fmt.Println("MADE IT.")
 	return -1
 }
 
@@ -98,7 +102,7 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	fmt.Println(searched)
-	sought := "shrimp"
+	sought := "shamu"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
