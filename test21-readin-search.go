@@ -1,5 +1,7 @@
-// IMPORT, MANIPULATE AND SEARCH DATA
-// BROKEN FOR NOW
+/*
+EXPONENTIAL, EXHAUSTIVE, MULTI-RETURN SEARCH UTILIZING BINARY SEARCH
+	IMPORT, MANIPULATE AND SEARCH DATA
+*/
 
 package main
 
@@ -48,28 +50,23 @@ func shellSort(x []string) []string {
 	return x
 }
 
-func binSearch(x string, y []string, i int) int {
-	high := Min(i, len(y))
-	low := (i / 2)
+func binSearch(x string, y []string, a int, z int) int {
 
-	for high >= low {
-		point := ((high - low) / 2) + low
+	for z >= a {
+		point := ((z - a) / 2) + a
 
 		switch {
 		case strings.EqualFold(x, y[point]):
 			return point
 		case strings.Compare(x, y[point]) == -1:
-			high = point - 1
+			return binSearch(x, y, a, point-1)
 		case strings.Compare(x, y[point]) == 1:
-			low = point + 1
+			return binSearch(x, y, point+1, z)
 		}
 	}
 	return -1
 }
 
-/*
-EXPONENTIAL, EXHAUSTIVE, MULTI-RETURN SEARCH UTILIZING BINARY SEARCH
-*/
 func expoSearch(x string, y []string) int {
 
 	if y[0] == x {
@@ -81,8 +78,9 @@ func expoSearch(x string, y []string) int {
 		i = i * 2
 	}
 
-	fmt.Println(i)
-	return binSearch(x, y, i)
+	high := Min(i, len(y))
+	low := (i / 2)
+	return binSearch(x, y, low, high)
 }
 
 func main() {
@@ -104,7 +102,7 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	fmt.Println(searched)
-	sought := "yuhmudduh"
+	sought := "aminuls"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
