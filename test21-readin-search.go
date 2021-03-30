@@ -101,7 +101,7 @@ func main() {
 		}
 	}
 	searched := shellSort(data_str)
-	fmt.Println(searched)
+	//fmt.Println(searched)
 	sought := "aminuls"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
