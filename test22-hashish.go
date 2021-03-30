@@ -12,11 +12,12 @@ func convSHA256(data []byte) []byte {
 }
 
 func main() {
-	data, err := ioutil.ReadFile("[FILE]")
+	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
+	// data, err := ioutil.ReadFile("/run/media/EXTHD/DOCUMENTS [EXTHD]/tester.txt")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
 	}
-	hash := sha256.Sum256(data)
-	fmt.Printf("%x", hash[:])
+	hasher := convSHA256(data)
+	fmt.Printf("RESULT: %x", hasher[:])
 }
