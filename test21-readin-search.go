@@ -70,7 +70,7 @@ func binSearch(x string, y []string, a int, z int) int {
 
 func expoSearch(x string, y []string) int {
 
-	if y[0] == x {
+	if len(y) == 0 {
 		return 0
 	}
 
@@ -103,7 +103,7 @@ func main() {
 	}
 	searched := shellSort(data_str)
 	//fmt.Println(searched)
-	sought := "aminuls"
+	sought := "marsupial"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
