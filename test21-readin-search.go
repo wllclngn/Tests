@@ -1,5 +1,4 @@
 // IMPORT, MANIPULATE AND SEARCH DATA
-// BROKEN FOR NOW
 
 package main
 
@@ -48,26 +47,27 @@ func shellSort(x []string) []string {
 	return x
 }
 
-func binSearch(x string, y []string, l int, r int) int {
+func binSearch(x string, y []string) int {
+	high := len(y) - 1
+	low := 0
 
-	for r >= l {
-		point := ((r - l) / 2) + l
+	for high >= low {
+		point := ((high - low) / 2) + low
 
 		switch {
-
-		case strings.Compare(x, y[point]) == 0:
+		case strings.EqualFold(x, y[point]):
 			return point
 		case strings.Compare(x, y[point]) == -1:
-			return binSearch(x, y, l+1, r)
-		default:
-			return binSearch(x, y, l, r-1)
-
+			high = point - 1
+		case strings.Compare(x, y[point]) == 1:
+			low = point + 1
 		}
 	}
-	fmt.Println("MADE IT.")
 	return -1
 }
 
+/*
+ABANDONED EXPONENTIAL, EXHAUSTIVE, MULTI-RETURN SEARCH UTILIZING BINARY SEARCH
 func expoSearch(x string, y []string) int {
 
 	n := len(y) / len(y[0])
@@ -80,11 +80,13 @@ func expoSearch(x string, y []string) int {
 		i = i * 2
 	}
 
+	fmt.Println(i)
 	return binSearch(x, y, (i / 2), Min(i, len(y)))
 }
+*/
 
 func main() {
-	data, err := ioutil.ReadFile("[FILE]")
+	data, err := ioutil.ReadFile("d://DOCUMENTS [EXTHD]/tester.txt")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
@@ -103,7 +105,7 @@ func main() {
 	searched := shellSort(data_str)
 	fmt.Println(searched)
 	sought := "shamu"
-	intSl := expoSearch(sought, searched)
+	intSl := binSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
 	} else {
