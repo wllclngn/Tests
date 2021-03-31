@@ -28,7 +28,7 @@ func binToHex(b []byte) string {
 			if binInt >= 16 {
 				y := binInt % 16
 				value = append(value, y)
-				binInt = binInt / 16
+				binInt >>= 4
 			} else {
 				value = append(value, binInt)
 				break
