@@ -76,7 +76,7 @@ func expoSearch(x string, y []string) int {
 
 	i := 1
 	for i < len(y) && y[i] <= x {
-		i = i * 2
+		i <<= 1
 	}
 
 	high := Min(i, len(y))
@@ -102,8 +102,8 @@ func main() {
 		}
 	}
 	searched := shellSort(data_str)
-	//fmt.Println(searched)
-	sought := "marsupial"
+	fmt.Println(searched)
+	sought := "yuhmudduh"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
