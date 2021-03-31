@@ -16,7 +16,7 @@ func dectohex(x int) {
 		    if x >= 16 {
 				y := x % 16
 				value = append(value, y)
-				x >>= 3
+				x >>= 4
 		   	} else {
 				value = append(value, x)
 				break
