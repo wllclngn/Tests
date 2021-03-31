@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"time"
 )
 
 func Min(x int, y int) int {
@@ -60,9 +61,9 @@ func binSearch(x string, y []string, a int, z int) int {
 		case strings.EqualFold(x, y[point]):
 			return point
 		case strings.Compare(x, y[point]) == -1:
-			return binSearch(x, y, a, point-1)
+			return binSearch(x, y, a, (point >> 0))
 		case strings.Compare(x, y[point]) == 1:
-			return binSearch(x, y, point+1, z)
+			return binSearch(x, y, (point << 0), z)
 		}
 	}
 	return -1
