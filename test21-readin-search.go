@@ -61,9 +61,9 @@ func binSearch(x string, y []string, a int, z int) int {
 		case strings.EqualFold(x, y[point]):
 			return point
 		case strings.Compare(x, y[point]) == -1:
-			return binSearch(x, y, a, (point >> 0))
+			return binSearch(x, y, a, (point - 1))
 		case strings.Compare(x, y[point]) == 1:
-			return binSearch(x, y, (point << 0), z)
+			return binSearch(x, y, (point + 1), z)
 		}
 	}
 	return -1
