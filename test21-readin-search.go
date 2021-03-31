@@ -54,7 +54,7 @@ func shellSort(x []string) []string {
 func binSearch(x string, y []string, a int, z int) int {
 
 	for z >= a {
-		point := ((z - a) / 2) + a
+		point := ((z - a) >> 1) + a
 
 		switch {
 		case strings.EqualFold(x, y[point]):
@@ -80,7 +80,7 @@ func expoSearch(x string, y []string) int {
 	}
 
 	high := Min(i, len(y))
-	low := (i / 2)
+	low := (i >> 1)
 	return binSearch(x, y, low, high)
 }
 
