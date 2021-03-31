@@ -7,8 +7,8 @@ import (
 )
 
 func convSHA256(data []byte) []byte {
-	hash := sha256.Sum256(data)
-	return hash[:]
+	hashish := sha256.Sum256(data)
+	return hashish[:]
 }
 
 func main() {
