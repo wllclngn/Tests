@@ -27,10 +27,8 @@ func calcMinRun(n int) int {
 
 func insertionSort(arr []int, x int, y int) {
 	for i := x; i <= y; i++ {
-		j := i
-		for j > x && arr[j] < arr[j-1] {
+		for j := i; j > x && arr[j] < arr[j-1]; j-- {
 			arr[j], arr[j-1] = arr[j-1], arr[j]
-			j--
 		}
 	}
 }
@@ -80,15 +78,13 @@ func timSort(arr []int) {
 		insertionSort(arr, i, end)
 	}
 
-	j := minRun
-	for j < n {
+	for j := minRun; j < n; j <<= 1 {
 		for left := 0; left < n; left += (j << 1) {
 			mid := Min(n-1, left+j-1)
 			right := Min((left + (j << 1) - 1), (n - 1))
 
 			mergeSort(arr, left, mid, right)
 		}
-		j <<= 1
 	}
 }
 
