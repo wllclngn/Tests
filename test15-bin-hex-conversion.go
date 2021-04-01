@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -35,19 +34,20 @@ func binToHex(b []byte) string {
 			}
 		}
 		for j := len(value) - 1; j >= 0; j-- {
-			if value[j] == 10 {
+			switch {
+			case value[j] == 10:
 				value2 = append(value2, "A")
-			} else if value[j] == 11 {
+			case value[j] == 11:
 				value2 = append(value2, "B")
-			} else if value[j] == 12 {
+			case value[j] == 12:
 				value2 = append(value2, "C")
-			} else if value[j] == 13 {
+			case value[j] == 13:
 				value2 = append(value2, "D")
-			} else if value[j] == 14 {
+			case value[j] == 14:
 				value2 = append(value2, "E")
-			} else if value[j] == 15 {
+			case value[j] == 15:
 				value2 = append(value2, "F")
-			} else {
+			default:
 				valueStr := strconv.Itoa(value[j])
 				value2 = append(value2, valueStr)
 			}
