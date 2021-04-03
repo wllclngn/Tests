@@ -1,102 +1,66 @@
-// BINARY TO HEX CONVERSION
+// BIG END, LITTLE END BIT CONVERSION
 
 package main
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
-	"time"
 )
 
-func binToHex(b []byte) string {
+func bigLilConv(x []byte) []byte {
 
-	binInt := 0
-	power := 0
-
-	for i := len(b) - 1; i >= 0; i-- {
-		binInt += int(b[i]) * (1 << power)
-		power++
+	if (len(x) % 4) != 0 {
+		fmt.Println("ERROR:", x)
+		panic("Bits' length is not modulus of four.")
+	} else if (len(x) % 8) != 0 {
+		fmt.Println("ERROR:", x)
+		panic("Bits' length is not 8-bit based.")
 	}
 
-	fmt.Println("DEC:", binInt)
-	var value []int
-	value2 := []string{"0x"}
-	if binInt > 9 {
-		for i := 0; i < 9223372036854775807; i++ {
-			if binInt >= 16 {
-				y := binInt % 16
-				value = append(value, y)
-				binInt >>= 4
-			} else {
-				value = append(value, binInt)
-				break
-			}
+	for i := 0; i < (len(x) >> 1); i += 4 {
+		if (i % 4) == 0 {
+
+			// x[i+0], x[i+1], x[i+2], x[i+3], x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)] = x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)], x[i+0], x[i+1], x[i+2], x[i+3]
+
+			x[i+0], x[len(x)-(i+4)] = x[len(x)-(i+4)], x[i+0]
+			x[i+1], x[len(x)-(i+3)] = x[len(x)-(i+3)], x[i+1]
+			x[i+2], x[len(x)-(i+2)] = x[len(x)-(i+2)], x[i+2]
+			x[i+3], x[len(x)-(i+1)] = x[len(x)-(i+1)], x[i+3]
+
 		}
-		for j := len(value) - 1; j >= 0; j-- {
-			switch {
-			case value[j] == 10:
-				value2 = append(value2, "A")
-			case value[j] == 11:
-				value2 = append(value2, "B")
-			case value[j] == 12:
-				value2 = append(value2, "C")
-			case value[j] == 13:
-				value2 = append(value2, "D")
-			case value[j] == 14:
-				value2 = append(value2, "E")
-			case value[j] == 15:
-				value2 = append(value2, "F")
-			default:
-				valueStr := strconv.Itoa(value[j])
-				value2 = append(value2, valueStr)
-			}
-		}
-	} else {
-		z := strconv.Itoa(binInt)
-		value2 = append(value2, z)
 	}
-	value3 := strings.Join(value2, "")
-	fmt.Println("HEX:", value3)
-	return value3
+
+	return x
 }
 
 func main() {
 
-	start := time.Now()
-	nibble := make([]byte, 1, 1)
-	nibble = []byte{0, 1}
-	fmt.Println("BIN:", nibble)
+	/*
+		var nibble []byte
+		nibble := make([]byte, 1, 1)
+		nibble = []byte{0, 1}
+		bigLilConv(nibble)
+	*/
 
-	binToHex(nibble)
-	elapsed := time.Since(start)
-	fmt.Println("Elapsed:", elapsed, "\n")
+	bite := make([]byte, 1, 1)
+	bite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
+	fmt.Println(bite)
+	test1 := bigLilConv(bite)
+	fmt.Println(test1)
 
-	start = time.Now()
-	litBite := make([]byte, 1, 1)
-	litBite = []byte{0, 0, 0, 1, 0, 0, 1, 1}
-	fmt.Println("BIN:", litBite)
+	bigBite := make([]byte, 2, 2)
+	bigBite = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println(bigBite)
+	test2 := bigLilConv(bigBite)
+	fmt.Println(test2)
+	test3 := bigLilConv(test2)
+	fmt.Println(test3)
 
-	binToHex(litBite)
-	elapsed = time.Since(start)
-	fmt.Println("Elapsed:", elapsed, "\n")
-
-	start = time.Now()
-	litBite2 := make([]byte, 2, 2)
-	litBite2 = []byte{0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println("BIN:", litBite2)
-
-	binToHex(litBite2)
-	elapsed = time.Since(start)
-	fmt.Println("Elapsed:", elapsed, "\n")
-
-	start = time.Now()
-	litBite3 := make([]byte, 2, 2)
-	litBite3 = []byte{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-	fmt.Println("BIN:", litBite3)
-
-	binToHex(litBite3)
-	elapsed = time.Since(start)
-	fmt.Println("Elapsed:", elapsed, "\n")
+	biggerBite := make([]byte, 2, 2)
+	biggerBite = []byte{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	fmt.Println(biggerBite)
+	test4 := bigLilConv(biggerBite)
+	fmt.Println(test4)
+	test5 := bigLilConv(test4)
+	fmt.Println(test5)
 
 }
