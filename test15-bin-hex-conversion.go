@@ -17,16 +17,14 @@ func bigLilConv(x []byte) []byte {
 	}
 
 	for i := 0; i < (len(x) >> 1); i += 4 {
-		if (i % 4) == 0 {
 
-			// x[i+0], x[i+1], x[i+2], x[i+3], x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)] = x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)], x[i+0], x[i+1], x[i+2], x[i+3]
+		// x[i+0], x[i+1], x[i+2], x[i+3], x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)] = x[len(x)-(i+4)], x[len(x)-(i+3)], x[len(x)-(i+2)], x[len(x)-(i+1)], x[i+0], x[i+1], x[i+2], x[i+3]
 
-			x[i+0], x[len(x)-(i+4)] = x[len(x)-(i+4)], x[i+0]
-			x[i+1], x[len(x)-(i+3)] = x[len(x)-(i+3)], x[i+1]
-			x[i+2], x[len(x)-(i+2)] = x[len(x)-(i+2)], x[i+2]
-			x[i+3], x[len(x)-(i+1)] = x[len(x)-(i+1)], x[i+3]
+		x[i+0], x[len(x)-(i+4)] = x[len(x)-(i+4)], x[i+0]
+		x[i+1], x[len(x)-(i+3)] = x[len(x)-(i+3)], x[i+1]
+		x[i+2], x[len(x)-(i+2)] = x[len(x)-(i+2)], x[i+2]
+		x[i+3], x[len(x)-(i+1)] = x[len(x)-(i+1)], x[i+3]
 
-		}
 	}
 
 	return x
