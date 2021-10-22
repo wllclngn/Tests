@@ -88,12 +88,8 @@ func punctuation(x string) []string {
 			justPunct = append(justPunct, string(x[i]))
 		case x[i] == 150:
 			justPunct = append(justPunct, string(x[i]))
-		case x[i] == 151:
-			justPunct = append(justPunct, string('—'))
 		case x[i] == 182:
 			justPunct = append(justPunct, string(x[i]))
-			/*
-			 */
 		}
 	}
 	return justPunct
