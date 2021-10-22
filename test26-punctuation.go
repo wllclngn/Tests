@@ -1,4 +1,4 @@
-// GO VERSION OF https://just-the-punctuation.glitch.me/ //
+// GO VERSION OF https://just-the-punctuation.glitch.me/
 // "For the love of Go..."
 
 package main
