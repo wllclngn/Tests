@@ -6,12 +6,31 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
 func punctuation(x string) []string {
 	var justPunct []string
 	for i := 0; i < len(x); i++ {
+
+		testing := strconv.QuoteRuneToASCII(rune(x[i]))
+		if len(testing) == 8 {
+			noQuote := testing[2 : len(testing)-1]
+			fmt.Println(noQuote)
+			switch {
+
+			case noQuote == "u0094":
+				justPunct = append(justPunct, "—")
+			case noQuote == "u0099":
+				justPunct = append(justPunct, "’")
+			case noQuote == "u009c":
+				justPunct = append(justPunct, "“")
+			case noQuote == "u009d":
+				justPunct = append(justPunct, "”")
+			}
+		}
+
 		switch {
 		case x[i] == 33:
 			justPunct = append(justPunct, string(x[i]))
@@ -67,16 +86,14 @@ func punctuation(x string) []string {
 			justPunct = append(justPunct, string(x[i]))
 		case x[i] == 133:
 			justPunct = append(justPunct, string(x[i]))
-		case x[i] == 139:
-			justPunct = append(justPunct, string(x[i]))
 		case x[i] == 150:
 			justPunct = append(justPunct, string(x[i]))
 		case x[i] == 151:
-			justPunct = append(justPunct, string("—"))
-		case x[i] == 155:
-			justPunct = append(justPunct, string(x[i]))
+			justPunct = append(justPunct, string('—'))
 		case x[i] == 182:
 			justPunct = append(justPunct, string(x[i]))
+			/*
+			 */
 		}
 	}
 	return justPunct
@@ -84,13 +101,12 @@ func punctuation(x string) []string {
 
 func main() {
 
-	data, err := ioutil.ReadFile("[PATH TO FILE]")
+	data, err := ioutil.ReadFile("d://[0] DOCUMENTS/The Fall of the House of Usher.txt")
 	if err != nil {
 		fmt.Println("File input ERROR:", err)
 		return
 	}
 	data_str := string(data[:])
-	data_str = strings.Replace(data_str, "\n", "", -1)
-	//fmt.Println("INPUT DATA:", data_str)
+	data_str = strings.Replace(data_str, "\r", " ", -1)
 	fmt.Println(punctuation(data_str))
 }
