@@ -9,10 +9,11 @@ import (
 )
 
 func stretch(x []int, y int, z int) {
-	for ; z < len(x); z++ {
-		if x[z] != 0 {
-			x[z], x[y] = x[y], x[z]
-			y++
+	fulcrum := y
+	for i := z; i < len(x); i++ {
+		if x[i] != 0 {
+			x[i], x[fulcrum] = x[fulcrum], x[i]
+			fulcrum++
 		}
 	}
 }
