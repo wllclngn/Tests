@@ -8,8 +8,19 @@ import (
 	"time"
 )
 
-func zeroMover(board []int) {
+func stretch(x []int, y int, z int) {
+	fulcrum := y
+	for i := z; i < len(x)-1; i++ {
+		if x[i] != 0 {
+			x[i], x[fulcrum] = x[fulcrum], x[i]
+			fulcrum++
+			continue
+		}
+	}
+}
 
+func zeroMover(board []int) {
+everything:
 	for i := 0; i < len(board)-1; i++ {
 		if board[i] == 0 && board[i+1] != 0 {
 			board[i], board[i+1] = board[i+1], board[i]
@@ -19,22 +30,23 @@ func zeroMover(board []int) {
 			for j := i; j < len(board)-1; j++ {
 				if board[j] != 0 {
 					board[i], board[j] = board[j], board[i]
-					break
 				}
+				stretch(board, i, j)
+				break everything
 			}
 		}
 	}
 }
 
 func main() {
-	board := make([]int, 100, 100)
+	board := make([]int, 10000000, 10000000)
 	for i := 0; i < len(board); i++ {
 		board[i] = rand.Intn(2)
 	}
-	fmt.Println(board)
+	//fmt.Println(board)
 	start := time.Now()
 	zeroMover(board)
 	elapsed := time.Since(start)
-	fmt.Println(board)
+	//fmt.Println(board)
 	fmt.Println(elapsed)
 }
