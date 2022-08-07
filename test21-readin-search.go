@@ -95,16 +95,21 @@ func main() {
 	var data_str []string
 	setup := ""
 	for j := 0; j < len(data); j++ {
-		if data[j] == 10 {
+		switch {
+		case data[j] == 10:
 			data_str = append(data_str, setup)
 			setup = ""
-		} else {
+		case j == (len(data) - 1):
+			setup = setup + string(data[j])
+			data_str = append(data_str, setup)
+			setup = ""
+		default:
 			setup = setup + string(data[j])
 		}
 	}
 	searched := shellSort(data_str)
 	fmt.Println(searched)
-	sought := "yuhmudduh"
+	sought := "newData"
 	intSl := expoSearch(sought, searched)
 	if intSl != -1 {
 		fmt.Printf("SEARCH: \"%v\"\nINDEX: %d\nSLICE LIBRARY MATCH: \"%v\"\n", sought, intSl, searched[intSl])
