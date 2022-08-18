@@ -1,5 +1,5 @@
 // GO VERSION OF https://just-the-punctuation.glitch.me/
-// "For the love of Go..."
+// "For the love of Go—"
 
 package main
 
@@ -12,6 +12,11 @@ import (
 
 func punctuation(x string) []string {
 	var justPunct []string
+
+	x = strings.Replace(x, "\r", "", -1)
+	x = strings.Replace(x, "\n", "", -1)
+	x = strings.Replace(x, " ", "", -1)
+
 	for i := 0; i < len(x); i++ {
 
 		testing := strconv.QuoteRuneToASCII(rune(x[i]))
@@ -86,8 +91,5 @@ func main() {
 		return
 	}
 	data_str := string(data[:])
-	data_str = strings.Replace(data_str, "\r", "", -1)
-	data_str = strings.Replace(data_str, "\n", "", -1)
-	data_str = strings.Replace(data_str, " ", "", -1)
 	fmt.Println(punctuation(data_str))
 }
