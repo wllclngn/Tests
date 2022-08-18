@@ -11,15 +11,19 @@ import (
 )
 
 func punctuation(x string) []string {
+
 	var justPunct []string
 
 	x = strings.Replace(x, "\r", "", -1)
 	x = strings.Replace(x, "\n", "", -1)
 	x = strings.Replace(x, " ", "", -1)
 
+	testing := ""
+
 	for i := 0; i < len(x); i++ {
 
-		testing := strconv.QuoteRuneToASCII(rune(x[i]))
+		testing = strconv.QuoteRuneToASCII(rune(x[i]))
+		
 		if len(testing) == 8 {
 			noQuote := testing[2 : len(testing)-1]
 			switch {
