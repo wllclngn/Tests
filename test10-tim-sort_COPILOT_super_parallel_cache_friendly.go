@@ -1,3 +1,5 @@
+/* COPILOT'S ULTRA OPTIMIZED, PARALLEL, CONCURRENT, CACHE & MEMORY FRIENDLY TIMSORT */
+
 package main
 
 import (
@@ -8,7 +10,6 @@ import (
 	"time"
 )
 
-// calcMinRun calculates the minimum run size for Timsort.
 func calcMinRun(n int) int {
 	const MIN_MERGE = 32
 	r := 0
@@ -19,7 +20,6 @@ func calcMinRun(n int) int {
 	return n + r
 }
 
-// insertionSort performs insertion sort on a subarray.
 func insertionSort(arr []int, start, end int) {
 	for i := start + 1; i <= end; i++ {
 		key := arr[i]
@@ -32,10 +32,8 @@ func insertionSort(arr []int, start, end int) {
 	}
 }
 
-// cacheFriendlyMerge performs a cache-optimized merge.
 func cacheFriendlyMerge(arr []int, left, mid, right int) {
-	// Divide the array into blocks that fit into the CPU cache.
-	const BLOCK_SIZE = 64 // Approximate size of a cache line (in bytes).
+	const BLOCK_SIZE = 64
 	temp := make([]int, right-left+1)
 	i, j, k := left, mid+1, 0
 
@@ -62,11 +60,9 @@ func cacheFriendlyMerge(arr []int, left, mid, right int) {
 		k++
 	}
 
-	// Copy the merged data back to the original array.
 	copy(arr[left:right+1], temp)
 }
 
-// parallelMerge performs merging in parallel for large chunks.
 func parallelMerge(arr []int, size, n int, temp []int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for left := 0; left < n; left += 2 * size {
@@ -79,7 +75,6 @@ func parallelMerge(arr []int, size, n int, temp []int, wg *sync.WaitGroup) {
 	}
 }
 
-// parallelTimSort performs Timsort with parallelized sorting and merging.
 func parallelTimSort(arr []int) {
 	n := len(arr)
 	if n < 2 {
@@ -88,7 +83,6 @@ func parallelTimSort(arr []int) {
 
 	minRun := calcMinRun(n)
 
-	// Step 1: Parallelized insertion sort for initial runs.
 	var wg sync.WaitGroup
 	cpuCount := runtime.NumCPU()
 	chunkSize := (n + cpuCount - 1) / cpuCount
@@ -103,18 +97,15 @@ func parallelTimSort(arr []int) {
 	}
 	wg.Wait()
 
-	// Step 2: Iterative merging with parallelism for larger sizes.
 	temp := make([]int, n)
 	for size := minRun; size < n; size *= 2 {
 		if size >= chunkSize {
-			// Use parallel merging for larger sizes.
 			for i := 0; i < cpuCount; i++ {
 				wg.Add(1)
 				go parallelMerge(arr, size, n, temp, &wg)
 			}
 			wg.Wait()
 		} else {
-			// Use sequential merging for smaller sizes.
 			for left := 0; left < n; left += 2 * size {
 				mid := int(math.Min(float64(left+size-1), float64(n-1)))
 				right := int(math.Min(float64(left+2*size-1), float64(n-1)))
@@ -127,7 +118,6 @@ func parallelTimSort(arr []int) {
 	}
 }
 
-// main demonstrates the super optimized Timsort implementation.
 func main() {
 	slice := []int{-14, -14, -13, -7, -4, -2, 0, 0, 5, 7, 7, 8, 12, 15, 15,
 		-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12, 49, 6, 78, 99,
