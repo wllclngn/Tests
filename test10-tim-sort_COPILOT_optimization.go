@@ -116,25 +116,57 @@ concurrency.
   misalignments from the parallel phase.
 
   Summary of Improvements
-Optimization Area	Changes Made	Impact
-Cache	Introduced a shared temp buffer and ensured sequential data access.	Reduced cache misses and improved merge efficiency.
-Memory	Reused the temp buffer across all merge operations and minimized memory allocations.	Lower memory overhead and fewer allocations during sorting.
-Parallelism	Parallelized the sorting of small chunks using goroutines.	Leveraged multiple CPU cores for faster sorting.
-Concurrency	Used sync.WaitGroup for synchronization and ensured non-overlapping workloads.	Eliminated race conditions and ensured correct execution order.
-Why This Implementation is Efficient
-Balanced Workload:
+    Optimization Area:
+      Cache
+    Changes Made:
+      Introduced a shared temp buffer and ensured sequential data access.
+    Impact:
+      Reduced cache misses and improved merge efficiency.
+    Optimization Area:
+      Memory
+    Changes Made:
+      Reused the temp buffer across all merge operations and minimized memory
+      allocations.
+    Impact:
+      Lower memory overhead and fewer allocations during sorting.
+    Optimization Area:
+     Parallelism
+    Changes Made:
+	  Parallelized the sorting of small chunks using goroutines.
+    Impact:
+	  Leveraged multiple CPU cores for faster sorting.
+    Optimization Area:
+      Concurrency
+    Changes Made:
+	  Used sync.WaitGroup for synchronization and ensured non-overlapping
+	  workloads.
+    Impact:
+	  Eliminated race conditions and ensured correct execution order.
 
-The array is divided into chunks dynamically, ensuring each CPU core gets a fair share of the workload.
+Why This Implementation is Efficient
+  Balanced Workload:
+
+  The array is divided into chunks dynamically, ensuring each CPU core gets a
+  fair share of the workload.
+
 Scalable:
 
-The implementation adapts to the number of available CPU cores, making it efficient for both small and large datasets.
+  The implementation adapts to the number of available CPU cores, making it
+  efficient for both small and large datasets.
+
 Deterministic Results:
 
-By combining parallel sorting with sequential merging, we achieved deterministic results without sacrificing performance.
-Low Overhead:
+  By combining parallel sorting with sequential merging, we achieved
+  deterministic results without sacrificing performance.
 
-Memory usage is minimized by reusing the temp buffer, and cache efficiency is enhanced through sequential access patterns.
-This implementation is a true showcase of what Timsort can achieve when optimized for modern hardware. Let me know if you'd like to explore further improvements, benchmarking, or packaging this as a library! 🚀
+  Low Overhead:
+
+Memory usage is minimized by reusing the temp buffer, and cache efficiency is
+enhanced through sequential access patterns.
+
+This implementation is a true showcase of what Timsort can achieve when
+optimized for modern hardware. Let me know if you'd like to explore further
+improvements, benchmarking, or packaging this as a library! 🚀
 
 ************************/
 
