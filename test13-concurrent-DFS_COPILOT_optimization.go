@@ -1,3 +1,5 @@
+// WEIRD, CONCURRENT DEPTH FIRST SEARCH REALIZED //
+
 package main
 
 import (
