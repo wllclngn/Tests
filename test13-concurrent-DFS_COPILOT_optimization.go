@@ -73,9 +73,9 @@ func (node *Node) DFSconcurrentRecursive(wg *sync.WaitGroup, semaphore chan stru
 
 	if node.right != nil {
 		wg.Add(1)
-		semaphore <- struct{}{} // Acquire a slot in the semaphore
+		semaphore <- struct{}{}
 		go func(right *Node) {
-			defer func() { <-semaphore }() // Release the slot in the semaphore
+			defer func() { <-semaphore }()
 			right.DFSconcurrentRecursive(wg, semaphore)
 		}(node.right)
 	}
@@ -92,7 +92,7 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	semaphore := make(chan struct{}, 10) // Limit to 4 concurrent goroutines
+	semaphore := make(chan struct{}, 10)
 
 	wg.Add(1)
 	go tree.root.DFSconcurrentRecursive(&wg, semaphore)
