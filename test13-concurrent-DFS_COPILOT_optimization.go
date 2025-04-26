@@ -54,7 +54,7 @@ func (node *Node) insert(data int) {
 }
 
 func (node *Node) DFSconcurrentRecursive(wg *sync.WaitGroup, semaphore chan struct{}) {
-	defer wg.Done() // Ensure Done is called when this function exits
+	defer wg.Done()
 
 	if node == nil {
 		return
