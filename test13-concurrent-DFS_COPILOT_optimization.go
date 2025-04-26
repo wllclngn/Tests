@@ -92,7 +92,7 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	semaphore := make(chan struct{}, 10)
+	semaphore := make(chan struct{}, 20)
 
 	wg.Add(1)
 	go tree.root.DFSconcurrentRecursive(&wg, semaphore)
