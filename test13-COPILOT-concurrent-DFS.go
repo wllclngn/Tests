@@ -53,7 +53,6 @@ func (node *Node) insert(data int) {
 	}
 }
 
-// Recursive DFS function with bounded concurrency
 func (node *Node) DFSconcurrentRecursive(wg *sync.WaitGroup, semaphore chan struct{}) {
 	defer wg.Done() // Ensure Done is called when this function exits
 
@@ -61,15 +60,13 @@ func (node *Node) DFSconcurrentRecursive(wg *sync.WaitGroup, semaphore chan stru
 		return
 	}
 
-	// Print the current node
 	fmt.Printf("Visiting Node: %d\n", node.key)
 
-	// Launch recursive goroutines for left and right children with bounded concurrency
 	if node.left != nil {
 		wg.Add(1)
-		semaphore <- struct{}{} // Acquire a slot in the semaphore
+		semaphore <- struct{}{}
 		go func(left *Node) {
-			defer func() { <-semaphore }() // Release the slot in the semaphore
+			defer func() { <-semaphore }()
 			left.DFSconcurrentRecursive(wg, semaphore)
 		}(node.left)
 	}
@@ -85,30 +82,23 @@ func (node *Node) DFSconcurrentRecursive(wg *sync.WaitGroup, semaphore chan stru
 }
 
 func main() {
-	// Set the maximum number of CPUs to use
 	processors := runtime.GOMAXPROCS(runtime.NumCPU())
 	start := time.Now()
 
-	// Create and populate the tree
 	var tree Tree
 	for i := 0; i <= 20; i++ {
 		tree.insert(i)
 	}
 
-	// WaitGroup to track all goroutines
 	var wg sync.WaitGroup
 
-	// Semaphore to limit the number of concurrent goroutines
 	semaphore := make(chan struct{}, 10) // Limit to 4 concurrent goroutines
 
-	// Start the DFS from the root
 	wg.Add(1)
 	go tree.root.DFSconcurrentRecursive(&wg, semaphore)
 
-	// Wait for all goroutines to complete
 	wg.Wait()
 
-	// Measure and print execution time
 	elapsed := time.Since(start)
 	fmt.Printf("\nProcessors: %d, Time elapsed: %v\n", processors, elapsed)
 }
